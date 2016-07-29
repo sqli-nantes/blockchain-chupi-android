@@ -5,6 +5,8 @@ import android.net.LocalSocketAddress;
 import android.util.Log;
 import android.util.SparseArray;
 
+import com.sqli.blockchain.automotive.EthereumService;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -37,8 +39,11 @@ public class RequestManager {
 
     private void createSocket() throws IOException {
         socket = new LocalSocket();
-
-        socket.connect(new LocalSocketAddress(ipcFilePath, LocalSocketAddress.Namespace.FILESYSTEM));
+        if( !socket.isConnected() ) {
+            socket.connect(new LocalSocketAddress(ipcFilePath, LocalSocketAddress.Namespace.FILESYSTEM));
+        } else{
+            Log.d(EthereumService.TAG,socket.getLocalSocketAddress().getName());
+        }
         out = new DataOutputStream(socket.getOutputStream());
 
         in = new BufferedReader(new InputStreamReader(socket.getInputStream(),CHARSET.name()));

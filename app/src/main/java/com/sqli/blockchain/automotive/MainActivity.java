@@ -1,11 +1,11 @@
 package com.sqli.blockchain.automotive;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
-import android.net.LocalSocket;
-import android.net.LocalSocketAddress;
+import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.ResultReceiver;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,11 +24,14 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EthereumService.CallBacks{
 
     static final String TAG = "MAIN_ACTIVITY";
 
-    Intent ethereumService;
+    Intent ethereumServiceIntent;
+    EthereumService ethereumService;
+    ServiceConnection ethereumServiceConnection;
+
     EthereumNodeManager nodeManager;
 
     Button button;
@@ -39,19 +42,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ethereumService = new Intent(this,EthereumService.class);
-        ethereumService.putExtra("onReady",);
-        startService(ethereumService);
+        ethereumServiceIntent = new Intent(this,EthereumService.class);
+        ethereumServiceConnection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                EthereumService.LocalBinder binder = (EthereumService.LocalBinder) iBinder;
+                ethereumService = binder.getServiceInstance();
+                ethereumService.registerClient(MainActivity.this);
+                ethereumService.checkGethReady();
+            }
 
-        try {
-            nodeManager = new EthereumNodeManager(getFilesDir().getAbsolutePath()+"/geth.ipc");
-        } catch (IOException e) {
-            Log.d(TAG,e.toString());
-            // PASSE ICI
-        }
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {}
+        };
 
-        button = (Button) findViewById(R.id.button);
+        startService(ethereumServiceIntent);
+        bindService(ethereumServiceIntent, ethereumServiceConnection,Context.BIND_AUTO_CREATE);
+
+        button = (Button) findViewById(R.id.node_info);
         button.setText("Node Info");
+        button.setEnabled(false);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,8 +73,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button2 = (Button) findViewById(R.id.button2);
+        button2 = (Button) findViewById(R.id.peers);
         button2.setText("PEERS");
+        button2.setEnabled(false);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +130,27 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        stopService(ethereumService);
+        unbindService(ethereumServiceConnection);
+        stopService(ethereumServiceIntent);
         super.onDestroy();
+    }
+
+    @Override
+    public void onGethReady() {
+        try {
+            nodeManager = new EthereumNodeManager(EthereumService.dataDir+EthereumService.GETH_IPC_FILE);
+
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    button.setEnabled(true);
+                    button2.setEnabled(true);
+                }
+            });
+
+
+        } catch (IOException e) {
+            Log.d(TAG,e.toString());
+        }
     }
 }
