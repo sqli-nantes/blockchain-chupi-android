@@ -34,8 +34,9 @@ public class MainActivity extends AppCompatActivity implements EthereumService.C
 
     EthereumNodeManager nodeManager;
 
-    Button button;
-    Button button2;
+    Button nodeInfoButton;
+    Button peersButton;
+    Button addPeerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,80 +60,63 @@ public class MainActivity extends AppCompatActivity implements EthereumService.C
         startService(ethereumServiceIntent);
         bindService(ethereumServiceIntent, ethereumServiceConnection,Context.BIND_AUTO_CREATE);
 
-        button = (Button) findViewById(R.id.node_info);
-        button.setText("Node Info");
-        button.setEnabled(false);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    nodeManager.admin.nodeInfo();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        ButtonListener buttonListener = new ButtonListener();
 
-        button2 = (Button) findViewById(R.id.peers);
-        button2.setText("PEERS");
-        button2.setEnabled(false);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    nodeManager.admin.peers();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        nodeInfoButton = (Button) findViewById(R.id.node_info);
+        nodeInfoButton.setEnabled(false);
+        nodeInfoButton.setOnClickListener(buttonListener);
+
+        peersButton = (Button) findViewById(R.id.peers);
+        peersButton.setEnabled(false);
+        peersButton.setOnClickListener(buttonListener);
+
+        addPeerButton = (Button) findViewById(R.id.add_peer);
+        addPeerButton.setEnabled(false);
+        addPeerButton.setOnClickListener(buttonListener);
 
 
     }
 
-    void getCoinbaseRPC(){
+    private class ButtonListener implements View.OnClickListener {
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        @Override
+        public void onClick(View view) {
             try {
-                URL url = new URL(EthereumService.GETH_RPC_ADDRESS+":"+EthereumService.GETH_RPC_PORT);
-                byte[] req = "{\"jsonrpc\":\"2.0\",\"method\":\"eth_coinbase\",\"params\":[],\"id\":1}".getBytes(StandardCharsets.UTF_8);
-
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("Content-Length",Integer.toString(req.length));
-                try(DataOutputStream out = new DataOutputStream(connection.getOutputStream())){
-                    out.write(req);
+                if (view == nodeInfoButton) {
+                    nodeManager.admin.nodeInfo();
+                } else if (view == peersButton) {
+                    nodeManager.admin.peers();
+                } else if (view == addPeerButton) {
+                    nodeManager.admin.addPeer("enode://b38b347d809fd10ebb7aba2f60091c89efdd18b12d093731ca374b0a404253646a94d326c472cbe80c713867a86eaca45b4a40f10724640cfead53ead05ae5a2@[::]:30303");
                 }
-                try{
-                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
-                    StringBuilder buffer = new StringBuilder();
-
-                    String line;
-                    while((line=in.readLine()) != null){
-                        buffer.append(line);
-                    }
-                    final JSONObject reply = new JSONObject(buffer.toString());
-
-                    Log.v(TAG,reply.toString());
-                }
-                finally {
-                    connection.disconnect();
-                }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-            }
-        }).start();
+        }
+    }
 
+    private void stopEthereum(){
+        try {
+            unbindService(ethereumServiceConnection);
+            stopService(ethereumServiceIntent);
+            nodeManager.stop();
+        } catch (IOException e) {
+            e.printStackTrace();
+            finish();
+        }
     }
 
     @Override
     protected void onDestroy() {
-        unbindService(ethereumServiceConnection);
-        stopService(ethereumServiceIntent);
+        stopEthereum();
         super.onDestroy();
+    }
+
+
+    @Override
+    protected void onStop() {
+        stopEthereum();
+        super.onStop();
     }
 
     @Override
@@ -143,14 +127,17 @@ public class MainActivity extends AppCompatActivity implements EthereumService.C
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    button.setEnabled(true);
-                    button2.setEnabled(true);
+                    nodeInfoButton.setEnabled(true);
+                    peersButton.setEnabled(true);
+                    addPeerButton.setEnabled(true);
                 }
             });
 
 
         } catch (IOException e) {
             Log.d(TAG,e.toString());
+            stopEthereum();
+            finish();
         }
     }
 }

@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Binder;
+import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -14,9 +16,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 
 /**
  * Created by gunicolas on 26/07/16.
@@ -24,10 +28,12 @@ import java.io.InputStreamReader;
 public class EthereumService extends Service {
 
     public static final String TAG = "ETHEREUM_SERVICE";
-    public static final String GETH_RPC_ADDRESS = "http://127.0.0.1";
-    public static final int GETH_RPC_PORT = 3000;
+    //public static final String GETH_RPC_ADDRESS = "http://127.0.0.1";
+    //public static final int GETH_RPC_PORT = 3000;
     public static final int GETH_NETWORK_ID = 100;
     public static final String GETH_IPC_FILE = "/geth.ipc";
+    public static final String GETH_GENESIS_FILE = "/genesis.json";
+
     public static String dataDir;
 
     private CallBacks callback;
@@ -36,31 +42,54 @@ public class EthereumService extends Service {
     private Thread gethThread;
     private Thread checkFileThread;
 
-
-
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         dataDir = getFilesDir().getAbsolutePath();
 
-        final StringBuilder gethParams = new StringBuilder();
-        /*
-        gethParams.append("--ipcpath \""+getFilesDir().getAbsolutePath()+"/geth.ipc\"").append(" ");
-        gethParams.append("--ipcdisable").append(" ");
-        gethParams.append("--rpc").append(" ");
-        gethParams.append("--rpcport "+GETH_RPC_PORT).append(" ");
-        gethParams.append("--rpccorsdomain=*").append(" ");
-        */
-        gethParams.append("--fast").append(" ");
-        gethParams.append("--lightkdf").append(" ");
-        gethParams.append("--nodiscover").append(" ");
-        gethParams.append("--networkid "+GETH_NETWORK_ID).append(" ");
-        gethParams.append("--datadir=" + dataDir).append(" ");
+        try {
+            saveGenesisOnStorage();
 
-        runGeth(gethParams.toString());
+            final StringBuilder gethParams = new StringBuilder();
+            /*
+            gethParams.append("--ipcpath \""+getFilesDir().getAbsolutePath()+"/geth.ipc\"").append(" ");
+            gethParams.append("--ipcdisable").append(" ");
+            gethParams.append("--rpc").append(" ");
+            gethParams.append("--rpcport "+GETH_RPC_PORT).append(" ");
+            gethParams.append("--rpccorsdomain=*").append(" ");
+            */
+            gethParams.append("--fast").append(" ");
+            gethParams.append("--lightkdf").append(" ");
+            gethParams.append("--nodiscover").append(" ");
+            gethParams.append("--networkid "+GETH_NETWORK_ID).append(" ");
+            gethParams.append("--datadir=" + dataDir).append(" ");
+            gethParams.append("--genesis=" + dataDir+GETH_GENESIS_FILE).append(" ");
+
+            runGeth(gethParams.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return START_NOT_STICKY;
+    }
+
+    private void saveGenesisOnStorage() throws Exception {
+        AssetManager asset = getBaseContext().getAssets();
+        InputStream in = asset.open("genesis.json");
+        new File(dataDir+GETH_GENESIS_FILE).createNewFile();
+        OutputStream out = new FileOutputStream(dataDir+GETH_GENESIS_FILE);
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read=in.read(buffer)) != -1){
+            out.write(buffer,0,read);
+        }
+        in.close();
+        in = null;
+        out.flush();
+        out.close();
+        out = null;
+
     }
 
     private void runGeth(final String gethParams) {
@@ -110,31 +139,11 @@ public class EthereumService extends Service {
         checkFileThread.start();
     }
 
-
-    public static String convertStreamToString(InputStream is) throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line).append("\n");
-        }
-        reader.close();
-        return sb.toString();
-    }
-
-    public static String getStringFromFile (File f) throws Exception {
-        FileInputStream fin = new FileInputStream(f);
-        String ret = convertStreamToString(fin);
-        //Make sure you close all streams.
-        fin.close();
-        return ret;
-    }
-
-
     @Override
     public void onDestroy() {
         gethThread.interrupt();
         checkFileThread.interrupt();
         super.onDestroy();
     }
+
 }

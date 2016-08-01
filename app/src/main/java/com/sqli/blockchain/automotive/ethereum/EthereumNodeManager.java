@@ -10,12 +10,17 @@ import java.io.IOException;
 public class EthereumNodeManager {
 
     public Admin admin;
+    RequestManager requestManager;
 
     public EthereumNodeManager(String ipcFilePath) throws IOException {
 
-        RequestManager requestManager = new RequestManager(ipcFilePath);
+        requestManager = new RequestManager(ipcFilePath);
         admin = new Admin(requestManager);
 
+    }
+
+    public void stop() throws IOException {
+        requestManager.stop();
     }
 
 

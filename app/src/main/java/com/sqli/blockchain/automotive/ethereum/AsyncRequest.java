@@ -17,8 +17,8 @@ public abstract class AsyncRequest extends Request {
         super(name, _parameters);
     }
 
-    public abstract void onSuccess(String data);
-    public abstract void onFail(String error);
+    public abstract void onSuccess(SuccessfulResponse res);
+    public abstract void onFail(ErrorResponse error);
 
     @Override
     public boolean isAsync() {

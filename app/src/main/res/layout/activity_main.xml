@@ -22,7 +22,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RPC"
+        android:text="NODE INFO"
         android:id="@+id/node_info"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
@@ -31,7 +31,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="IPC"
+        android:text="PEERS"
         android:id="@+id/peers"
         android:layout_below="@+id/node_info"
         android:layout_centerHorizontal="true" />.
@@ -39,9 +39,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="IPC"
+        android:text="ADD PEER"
         android:id="@+id/add_peer"
-        android:layout_below="@+id/node_info"
+        android:layout_below="@+id/peers"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

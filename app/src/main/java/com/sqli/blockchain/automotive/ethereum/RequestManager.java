@@ -7,6 +7,9 @@ import android.util.SparseArray;
 
 import com.sqli.blockchain.automotive.EthereumService;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -21,11 +24,13 @@ import java.util.Arrays;
 public class RequestManager {
 
     private static final Charset CHARSET = StandardCharsets.UTF_8;
+    private static final String TAG = RequestManager.class.getSimpleName();
     private static int requestNumber = 1;
 
     final String ipcFilePath;
     LocalSocket socket;
     DataOutputStream out;
+    Thread listeningThread;
 
     BufferedReader in;
 
@@ -51,7 +56,7 @@ public class RequestManager {
     }
 
     private void listenSocket(){
-        new Thread(new Runnable() {
+        listeningThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -60,17 +65,12 @@ public class RequestManager {
                         String line;
                         while (in.ready() && (line = in.readLine()) != null) {
                             buffer.append(line);
-                            Log.d(RequestManager.class.getSimpleName(), line);
-                        }
 
-                        /*try {
-                            JSONObject responseObject = new JSONObject(buffer.toString());
-                            responseObject.get
-                        }
-                        catch( JSONException jsonException){
-                            Log.d(RequestManager.class.getSimpleName(),"Error parsing JSON response : "+buffer.toString());
-                        }*/
+                            Log.d(TAG,line);
 
+                            Response res = formatResponse(line);
+                            dispatchRequestCallback(res);
+                        }
                         Thread.sleep(500);
                     }
                 }
@@ -78,7 +78,35 @@ public class RequestManager {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
+        listeningThread.start();
+    }
+
+    private void dispatchRequestCallback(Response res) {
+        int reqId = res.getId();
+        Request req = requestQueue.get(reqId);
+        if( req.isAsync() ){
+            AsyncRequest asyncReq = (AsyncRequest) req;
+            if( res instanceof SuccessfulResponse){
+                asyncReq.onSuccess((SuccessfulResponse) res);
+            } else if( res instanceof ErrorResponse){
+                asyncReq.onFail((ErrorResponse) res);
+            }
+        } else { //It's a synchronous request
+            //TODO
+        }
+        requestQueue.remove(reqId);
+    }
+
+    private Response formatResponse(String line) throws JSONException {
+        JSONObject obj = new JSONObject(line);
+        if( obj.has("result") ){
+            return new SuccessfulResponse(obj);
+        } else if( obj.has("error") ){
+            return new ErrorResponse(obj);
+        } else{
+            throw new JSONException("unknown response type : "+line);
+        }
     }
 
     public void sendAsync(Request m) throws IOException {
@@ -90,6 +118,8 @@ public class RequestManager {
                                     "\"id\":"+requestNumber+"" +
                                 "}";
 
+        Log.d(RequestManager.class.getSimpleName(),stringRequest);
+
         byte[] req = stringRequest.getBytes(CHARSET);
 
         out.write(req);
@@ -99,12 +129,15 @@ public class RequestManager {
         requestNumber++;
     }
 
-    private void stop(){
-        try {
+    public void stop() throws IOException {
+        if( this.socket != null ) {
             this.socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        if( this.listeningThread != null ){
+            this.listeningThread.interrupt();
         }
     }
+
+
 
 }
