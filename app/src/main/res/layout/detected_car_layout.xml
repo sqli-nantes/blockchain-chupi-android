@@ -9,16 +9,17 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
+        android:id="@+id/car_img"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/coccinelle"
+        android:src="@android:drawable/ic_delete"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         app:civ_border_width="8dp"
-        app:civ_border_color="@color/colorPrimary"/>
+        app:civ_border_color="@color/colorPrimary"
+        android:layout_above="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,6 +28,7 @@
         android:id="@+id/textView"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
         android:textSize="30dp"/>
 
     <TextView
@@ -34,7 +36,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="40dp"
-        android:text="Choupette"
+        android:text="Unknown"
         android:id="@+id/car_name"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"

@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Recherche en cours..."
-        android:id="@+id/textView2"
         android:layout_below="@+id/progress"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/activity_vertical_margin"
