@@ -1,26 +1,22 @@
 package com.sqli.blockchain.automotive;
 
-import android.app.Activity;
-import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Binder;
-import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 
 import com.github.ethereum.go_ethereum.cmd.Geth;
+import com.sqli.blockchain.automotive.ethereum.EthereumNodeManager;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by gunicolas on 26/07/16.
@@ -28,16 +24,17 @@ import java.io.OutputStream;
 public class EthereumService extends Service {
 
     public static final String TAG = "ETHEREUM_SERVICE";
-    //public static final String GETH_RPC_ADDRESS = "http://127.0.0.1";
-    //public static final int GETH_RPC_PORT = 3000;
     public static final int GETH_NETWORK_ID = 100;
     public static final String GETH_IPC_FILE = "/geth.ipc";
-    public static final String GETH_GENESIS_FILE = "/genesis.json";
+    public static final String GETH_GENESIS_FILE = "genesis.json";
+    public static final String GETH_BOOTNODE_FILE = "static-nodes.json";
 
     public static String dataDir;
 
-    private CallBacks callback;
+    private List<EthereumServiceInterface> callbacks;
     private final IBinder mBinder = new LocalBinder();
+
+    private EthereumNodeManager nodeManager;
 
     private Thread gethThread;
     private Thread checkFileThread;
@@ -46,9 +43,12 @@ public class EthereumService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         dataDir = getFilesDir().getAbsolutePath();
+        callbacks = new ArrayList<>();
 
         try {
-            saveGenesisOnStorage();
+
+            saveAssetOnStorage(GETH_GENESIS_FILE);
+            saveAssetOnStorage(GETH_BOOTNODE_FILE);
 
             final StringBuilder gethParams = new StringBuilder();
             /*
@@ -63,7 +63,7 @@ public class EthereumService extends Service {
             gethParams.append("--nodiscover").append(" ");
             gethParams.append("--networkid "+GETH_NETWORK_ID).append(" ");
             gethParams.append("--datadir=" + dataDir).append(" ");
-            gethParams.append("--genesis=" + dataDir+GETH_GENESIS_FILE).append(" ");
+            gethParams.append("--genesis=" + dataDir + "/" + GETH_GENESIS_FILE).append(" ");
 
             runGeth(gethParams.toString());
 
@@ -74,11 +74,12 @@ public class EthereumService extends Service {
         return START_NOT_STICKY;
     }
 
-    private void saveGenesisOnStorage() throws Exception {
+    private void saveAssetOnStorage(String assetFilename) throws Exception {
         AssetManager asset = getBaseContext().getAssets();
-        InputStream in = asset.open("genesis.json");
-        new File(dataDir+GETH_GENESIS_FILE).createNewFile();
-        OutputStream out = new FileOutputStream(dataDir+GETH_GENESIS_FILE);
+        InputStream in = asset.open(assetFilename);
+        String filePath = dataDir+"/"+assetFilename;
+        new File(filePath).createNewFile();
+        OutputStream out = new FileOutputStream(filePath);
         byte[] buffer = new byte[1024];
         int read;
         while((read=in.read(buffer)) != -1){
@@ -107,17 +108,22 @@ public class EthereumService extends Service {
         return mBinder;
     }
 
-    public interface CallBacks {
-        void onGethReady();
+    public interface EthereumServiceInterface {
+        void onEthereumServiceReady(EthereumNodeManager ethereumNodeManager);
     }
     public class LocalBinder extends Binder {
         public EthereumService getServiceInstance(){
             return EthereumService.this;
         }
     }
-    public void registerClient(Activity activity){
-        this.callback = (CallBacks) activity;
+
+    public void registerClient(EthereumServiceInterface client){
+        this.callbacks.add(client);
     }
+    public void unregisterClient(EthereumServiceInterface client){
+        this.callbacks.remove(client);
+    }
+
     public void checkGethReady() {
         checkFileThread = new Thread(new Runnable() {
             @Override
@@ -128,8 +134,11 @@ public class EthereumService extends Service {
                         Log.d(TAG,"attenmpt : "+(++attempts));
                         Thread.sleep(500);
                     }
-                    callback.onGethReady();
-                } catch (InterruptedException e) {
+
+                    nodeManager = new EthereumNodeManager(EthereumService.dataDir + EthereumService.GETH_IPC_FILE);
+                    dispatchCallback();
+
+                } catch (InterruptedException | IOException e) {
                     e.printStackTrace();
                 } finally {
                     checkFileThread.interrupt();
@@ -138,11 +147,25 @@ public class EthereumService extends Service {
         });
         checkFileThread.start();
     }
+    private void dispatchCallback(){
+        for(EthereumServiceInterface client : this.callbacks){
+            client.onEthereumServiceReady(this.nodeManager);
+        }
+    }
+
+    public EthereumNodeManager getNodeManager() {
+        return nodeManager;
+    }
 
     @Override
     public void onDestroy() {
-        gethThread.interrupt();
-        checkFileThread.interrupt();
+        try {
+            gethThread.interrupt();
+            checkFileThread.interrupt();
+            nodeManager.stop();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
     }
 

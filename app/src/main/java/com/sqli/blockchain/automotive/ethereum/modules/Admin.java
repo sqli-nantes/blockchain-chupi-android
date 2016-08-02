@@ -28,7 +28,6 @@ public class Admin extends Module {
         AsyncRequest request = new AsyncRequest("admin_addPeer", peer) {
             @Override
             public void onSuccess(SuccessfulResponse res) {
-                Log.d(EthereumService.TAG,res.toString());
             }
 
             @Override
@@ -43,7 +42,7 @@ public class Admin extends Module {
         AsyncRequest request = new AsyncRequest("admin_peers") {
             @Override
             public void onSuccess(SuccessfulResponse res) {
-                Log.d(EthereumService.TAG,res.toString());
+
             }
 
             @Override
@@ -58,7 +57,7 @@ public class Admin extends Module {
         AsyncRequest request = new AsyncRequest("admin_nodeInfo") {
             @Override
             public void onSuccess(SuccessfulResponse res) {
-                Log.d(EthereumService.TAG,res.toString());
+
             }
 
             @Override

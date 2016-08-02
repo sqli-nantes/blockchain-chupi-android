@@ -24,15 +24,13 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 
-public class MainActivity extends AppCompatActivity implements EthereumService.CallBacks{
+public class MainActivity extends AppCompatActivity implements EthereumService.EthereumServiceInterface{
 
-    static final String TAG = "MAIN_ACTIVITY";
+    static final String TAG = MainActivity.class.getSimpleName();
 
-    Intent ethereumServiceIntent;
-    EthereumService ethereumService;
-    ServiceConnection ethereumServiceConnection;
+    AutomotiveApplication app;
 
-    EthereumNodeManager nodeManager;
+    EthereumNodeManager ethereumNodeManager;
 
     Button nodeInfoButton;
     Button peersButton;
@@ -43,38 +41,54 @@ public class MainActivity extends AppCompatActivity implements EthereumService.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ethereumServiceIntent = new Intent(this,EthereumService.class);
-        ethereumServiceConnection = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                EthereumService.LocalBinder binder = (EthereumService.LocalBinder) iBinder;
-                ethereumService = binder.getServiceInstance();
-                ethereumService.registerClient(MainActivity.this);
-                ethereumService.checkGethReady();
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName componentName) {}
-        };
-
-        startService(ethereumServiceIntent);
-        bindService(ethereumServiceIntent, ethereumServiceConnection,Context.BIND_AUTO_CREATE);
-
         ButtonListener buttonListener = new ButtonListener();
 
         nodeInfoButton = (Button) findViewById(R.id.node_info);
-        nodeInfoButton.setEnabled(false);
         nodeInfoButton.setOnClickListener(buttonListener);
 
         peersButton = (Button) findViewById(R.id.peers);
-        peersButton.setEnabled(false);
         peersButton.setOnClickListener(buttonListener);
 
         addPeerButton = (Button) findViewById(R.id.add_peer);
-        addPeerButton.setEnabled(false);
         addPeerButton.setOnClickListener(buttonListener);
 
 
+        app = (AutomotiveApplication) getApplication();
+
+        if(  app.getEthereumService() == null ){
+            enableButtons(false);
+            app.registerClient(this);
+        } else if( app.getEthereumService().getNodeManager() == null) {
+            enableButtons(false);
+            app.registerClient(this);
+        } else{
+            this.ethereumNodeManager = app.getEthereumService().getNodeManager();
+            enableButtons(true);
+        }
+    }
+
+    private void enableButtons(final boolean enable){
+        nodeInfoButton.setEnabled(enable);
+        peersButton.setEnabled(enable);
+        addPeerButton.setEnabled(enable);
+    }
+
+    @Override
+    protected void onDestroy() {
+        app.getEthereumService().unregisterClient(this);
+        super.onDestroy();
+    }
+
+    @Override
+    public void onEthereumServiceReady(EthereumNodeManager _ethereumNodeManager) {
+        this.ethereumNodeManager = _ethereumNodeManager;
+        runOnUiThread(new Runnable(){
+            @Override
+            public void run(){
+                enableButtons(true);
+            }
+        });
+        this.app.getEthereumService().unregisterClient(this);
     }
 
     private class ButtonListener implements View.OnClickListener {
@@ -83,61 +97,15 @@ public class MainActivity extends AppCompatActivity implements EthereumService.C
         public void onClick(View view) {
             try {
                 if (view == nodeInfoButton) {
-                    nodeManager.admin.nodeInfo();
+                    ethereumNodeManager.admin.nodeInfo();
                 } else if (view == peersButton) {
-                    nodeManager.admin.peers();
+                    ethereumNodeManager.admin.peers();
                 } else if (view == addPeerButton) {
-                    nodeManager.admin.addPeer("enode://b38b347d809fd10ebb7aba2f60091c89efdd18b12d093731ca374b0a404253646a94d326c472cbe80c713867a86eaca45b4a40f10724640cfead53ead05ae5a2@[::]:30303");
+                    ethereumNodeManager.admin.addPeer("enode://fdb1dbd24161585d557d1edf6f268a878dd53a9fac56417fe7d3a37518530cfed0d6dec620c68491bcf9e947190081918eebe3bced509ee9ed78ef1355f296a8@10.33.44.222:30303");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    private void stopEthereum(){
-        try {
-            unbindService(ethereumServiceConnection);
-            stopService(ethereumServiceIntent);
-            nodeManager.stop();
-        } catch (IOException e) {
-            e.printStackTrace();
-            finish();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        stopEthereum();
-        super.onDestroy();
-    }
-
-
-    @Override
-    protected void onStop() {
-        stopEthereum();
-        super.onStop();
-    }
-
-    @Override
-    public void onGethReady() {
-        try {
-            nodeManager = new EthereumNodeManager(EthereumService.dataDir+EthereumService.GETH_IPC_FILE);
-
-            this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    nodeInfoButton.setEnabled(true);
-                    peersButton.setEnabled(true);
-                    addPeerButton.setEnabled(true);
-                }
-            });
-
-
-        } catch (IOException e) {
-            Log.d(TAG,e.toString());
-            stopEthereum();
-            finish();
         }
     }
 }
