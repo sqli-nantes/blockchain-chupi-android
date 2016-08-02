@@ -44,7 +44,6 @@ public class LoadingActivity extends AppCompatActivity implements BeaconConsumer
 
         beaconManager = BeaconManager.getInstanceForApplication(this.getApplicationContext());
         beaconManager.setForegroundScanPeriod(100L); //1 period scan duration
-        beaconManager.setForegroundBetweenScanPeriod(1L); //period between 2 scan
         beaconManager.getBeaconParsers().clear();
         beaconManager.getBeaconParsers().add(new BeaconParser().
                 setBeaconLayout("s:0-1=feaa,m:2-2=10,p:3-3:-41,i:4-20v"));
