@@ -3,13 +3,20 @@ package com.sqli.blockchain.automotive.ethereum.modules;
 import android.util.Log;
 
 import com.sqli.blockchain.automotive.EthereumService;
-import com.sqli.blockchain.automotive.ethereum.AsyncRequest;
-import com.sqli.blockchain.automotive.ethereum.ErrorResponse;
-import com.sqli.blockchain.automotive.ethereum.Formatter;
-import com.sqli.blockchain.automotive.ethereum.RequestManager;
-import com.sqli.blockchain.automotive.ethereum.SuccessfulResponse;
+import com.sqli.blockchain.automotive.ethereum.network.AsyncRequest;
+import com.sqli.blockchain.automotive.ethereum.network.ErrorResponse;
+import com.sqli.blockchain.automotive.ethereum.utils.Formatter;
+import com.sqli.blockchain.automotive.ethereum.network.RequestManager;
+import com.sqli.blockchain.automotive.ethereum.network.SuccessfulResponse;
+import com.sqli.blockchain.automotive.ethereum.utils.Peer;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by gunicolas on 27/07/16.
@@ -21,51 +28,64 @@ public class Admin extends Module {
         super(requestManager);
     }
 
-    public void addPeer(String _peer) throws IOException {
+    public void addPeer(String _peer, final ModuleCallback<Boolean> callback){
+        try {
+            String peer = Formatter.formatString(_peer);
+            AsyncRequest request = new AsyncRequest("admin_addPeer", peer) {
+                @Override
+                public void onSuccess(SuccessfulResponse res) {
+                    try {
+                        callback.onSuccess((boolean) res.getResults().get(0));
+                    } catch (JSONException e) {
+                        callback.onFail("JSON parse error");
+                    }
+                }
 
-        String peer = Formatter.formatString(_peer);
+                @Override
+                public void onFail(ErrorResponse error) {
+                    callback.onFail(error.getMessage());
+                }
+            };
+            sendRequest(request);
+        } catch (IOException e) { callback.onFail(e.getMessage()); }
+    }
+    public void peers(final ModuleCallback<List<Peer>> callback ){
+        try {
+            AsyncRequest request = new AsyncRequest("admin_peers") {
+                @Override
+                public void onSuccess(SuccessfulResponse res) {
+                    JSONArray results = res.getResults();
+                    List<Peer> returnedResult = new ArrayList<>();
+                    for(int i=0;i<results.length();i++){
+                        try{ returnedResult.add(new Peer((JSONObject) results.get(i))); }
+                        catch (JSONException e) { callback.onFail("JSON parsing error"); }
+                    }
+                }
 
-        AsyncRequest request = new AsyncRequest("admin_addPeer", peer) {
-            @Override
-            public void onSuccess(SuccessfulResponse res) {
-            }
-
-            @Override
-            public void onFail(ErrorResponse error) {
-                Log.d(EthereumService.TAG,error.toString());
-            }
-        };
-        sendRequest(request);
+                @Override
+                public void onFail(ErrorResponse error) { callback.onFail(error.getMessage()); }
+            };
+            sendRequest(request);
+        } catch (IOException e) { callback.onFail(e.getMessage()); }
+    }
+    public void nodeInfo(final ModuleCallback<Boolean> callback){
+        try {
+            AsyncRequest request = new AsyncRequest("admin_nodeInfo") {
+                @Override
+                public void onSuccess(SuccessfulResponse res) {
+                    try {
+                        callback.onSuccess((boolean) res.getResults().get(0));
+                    } catch (JSONException e) {
+                        callback.onFail("JSON parse error");
+                    }
+                }
+                @Override
+                public void onFail(ErrorResponse error) { callback.onFail(error.toString()); }
+            };
+            sendRequest(request);
+        } catch (IOException e) { callback.onFail(e.getMessage()); }
     }
 
-    public void peers() throws IOException {
-        AsyncRequest request = new AsyncRequest("admin_peers") {
-            @Override
-            public void onSuccess(SuccessfulResponse res) {
 
-            }
-
-            @Override
-            public void onFail(ErrorResponse error) {
-                Log.d(EthereumService.TAG,error.toString());
-            }
-        };
-        sendRequest(request);
-    }
-
-    public void nodeInfo() throws IOException {
-        AsyncRequest request = new AsyncRequest("admin_nodeInfo") {
-            @Override
-            public void onSuccess(SuccessfulResponse res) {
-
-            }
-
-            @Override
-            public void onFail(ErrorResponse error) {
-                Log.d(EthereumService.TAG,error.toString());
-            }
-        };
-        sendRequest(request);
-    }
 
 }

@@ -1,6 +1,7 @@
 package com.sqli.blockchain.automotive.ethereum;
 
 import com.sqli.blockchain.automotive.ethereum.modules.Admin;
+import com.sqli.blockchain.automotive.ethereum.network.RequestManager;
 
 import java.io.IOException;
 

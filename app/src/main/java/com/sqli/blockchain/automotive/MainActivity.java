@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.sqli.blockchain.automotive.ethereum.EthereumNodeManager;
+import com.sqli.blockchain.automotive.ethereum.modules.Module;
+import com.sqli.blockchain.automotive.ethereum.utils.Peer;
 
 import org.json.JSONObject;
 
@@ -22,6 +24,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements EthereumService.EthereumServiceInterface{
@@ -34,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements EthereumService.E
 
     Button nodeInfoButton;
     Button peersButton;
-    Button addPeerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +50,6 @@ public class MainActivity extends AppCompatActivity implements EthereumService.E
 
         peersButton = (Button) findViewById(R.id.peers);
         peersButton.setOnClickListener(buttonListener);
-
-        addPeerButton = (Button) findViewById(R.id.add_peer);
-        addPeerButton.setOnClickListener(buttonListener);
-
 
         app = (AutomotiveApplication) getApplication();
 
@@ -70,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements EthereumService.E
     private void enableButtons(final boolean enable){
         nodeInfoButton.setEnabled(enable);
         peersButton.setEnabled(enable);
-        addPeerButton.setEnabled(enable);
     }
 
     @Override
@@ -95,16 +92,30 @@ public class MainActivity extends AppCompatActivity implements EthereumService.E
 
         @Override
         public void onClick(View view) {
-            try {
-                if (view == nodeInfoButton) {
-                    ethereumNodeManager.admin.nodeInfo();
-                } else if (view == peersButton) {
-                    ethereumNodeManager.admin.peers();
-                } else if (view == addPeerButton) {
-                    ethereumNodeManager.admin.addPeer("enode://fdb1dbd24161585d557d1edf6f268a878dd53a9fac56417fe7d3a37518530cfed0d6dec620c68491bcf9e947190081918eebe3bced509ee9ed78ef1355f296a8@10.33.44.222:30303");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (view == nodeInfoButton) {
+                ethereumNodeManager.admin.nodeInfo(new Module.ModuleCallback<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean res) {
+
+                    }
+
+                    @Override
+                    public void onFail(String errorMessage) {
+
+                    }
+                });
+            } else if (view == peersButton) {
+                ethereumNodeManager.admin.peers(new Module.ModuleCallback<List<Peer>>() {
+                    @Override
+                    public void onSuccess(List<Peer> res) {
+
+                    }
+
+                    @Override
+                    public void onFail(String errorMessage) {
+
+                    }
+                });
             }
         }
     }

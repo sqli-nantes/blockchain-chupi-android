@@ -1,7 +1,7 @@
 package com.sqli.blockchain.automotive.ethereum.modules;
 
-import com.sqli.blockchain.automotive.ethereum.Request;
-import com.sqli.blockchain.automotive.ethereum.RequestManager;
+import com.sqli.blockchain.automotive.ethereum.network.Request;
+import com.sqli.blockchain.automotive.ethereum.network.RequestManager;
 
 import java.io.IOException;
 
@@ -18,5 +18,10 @@ public abstract class Module {
 
     public void sendRequest(Request request) throws IOException {
         requestManager.sendAsync(request);
+    }
+
+    public interface ModuleCallback<E> {
+        void onSuccess(E res);
+        void onFail(String errorMessage);
     }
 }

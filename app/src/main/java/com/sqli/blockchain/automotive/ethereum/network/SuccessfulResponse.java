@@ -1,4 +1,4 @@
-package com.sqli.blockchain.automotive.ethereum;
+package com.sqli.blockchain.automotive.ethereum.network;
 
 import org.json.JSONArray;
 import org.json.JSONException;

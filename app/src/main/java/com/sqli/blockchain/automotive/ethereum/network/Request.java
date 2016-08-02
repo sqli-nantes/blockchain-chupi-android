@@ -1,4 +1,4 @@
-package com.sqli.blockchain.automotive.ethereum;
+package com.sqli.blockchain.automotive.ethereum.network;
 
 /**
  * Created by gunicolas on 27/07/16.
