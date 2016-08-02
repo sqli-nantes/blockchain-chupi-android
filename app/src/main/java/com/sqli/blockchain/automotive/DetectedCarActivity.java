@@ -55,7 +55,7 @@ public class DetectedCarActivity extends AppCompatActivity {
                     .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            goToMainActivity(true);
+                            goToMainActivity();
                         }
                     })
                     .show();
@@ -66,7 +66,7 @@ public class DetectedCarActivity extends AppCompatActivity {
         rejectCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToMainActivity(false);
+                goToMainActivity();
             }
         });
 
