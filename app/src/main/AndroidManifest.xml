@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sqli.blockchain.automotive">
+    package="com.web3j.blockchain.automotive">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -11,11 +11,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".AutomotiveApplication">
+        android:name="com.web3j.blockchain.automotive.AutomotiveApplication">
 
-        <service android:name=".EthereumService"/>
+        <service android:name="com.web3j.blockchain.automotive.EthereumService"/>
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.web3j.blockchain.automotive.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
