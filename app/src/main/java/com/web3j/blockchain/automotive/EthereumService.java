@@ -7,10 +7,8 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.github.ethereum.go_ethereum.cmd.Geth;
-import com.web3j.blockchain.automotive.ethereum.EthereumNodeManager;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +27,6 @@ public class EthereumService extends Service {
 
     private List<EthereumServiceInterface> callbacks;
     private final IBinder mBinder = new LocalBinder();
-
-    private EthereumNodeManager nodeManager;
 
     private Thread gethThread;
     private Thread checkFileThread;
@@ -87,7 +83,7 @@ public class EthereumService extends Service {
     }
 
     public interface EthereumServiceInterface {
-        void onEthereumServiceReady(EthereumNodeManager ethereumNodeManager);
+        void onEthereumServiceReady();
     }
     public class LocalBinder extends Binder {
         public EthereumService getServiceInstance(){
@@ -112,11 +108,9 @@ public class EthereumService extends Service {
                         Log.d(TAG,"attenmpt : "+(++attempts));
                         Thread.sleep(500);
                     }
-
-                    nodeManager = new EthereumNodeManager(dataDir + "/" + GETH_IPC_FILE);
                     dispatchCallback();
 
-                } catch (InterruptedException | IOException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
                     checkFileThread.interrupt();
@@ -127,12 +121,8 @@ public class EthereumService extends Service {
     }
     private void dispatchCallback(){
         for(EthereumServiceInterface client : this.callbacks){
-            client.onEthereumServiceReady(this.nodeManager);
+            client.onEthereumServiceReady();
         }
-    }
-
-    public EthereumNodeManager getNodeManager() {
-        return nodeManager;
     }
 
     private boolean deleteIpcFile(){
@@ -143,15 +133,10 @@ public class EthereumService extends Service {
     @Override
     public void onDestroy() {
 
-        try {
-            gethThread.interrupt();
-            if( deleteIpcFile() ) {
-                checkFileThread.interrupt();
-                nodeManager.stop();
-            } else Log.e(TAG,"delete ipc file error");
-        } catch (IOException e) {
-            Log.e(TAG,e.getMessage());
-        }
+        gethThread.interrupt();
+        if( deleteIpcFile() ) {
+            checkFileThread.interrupt();
+        } else Log.e(TAG,"delete ipc file error");
 
         super.onDestroy();
     }

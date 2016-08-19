@@ -6,9 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-import android.util.Log;
-
-import com.web3j.blockchain.automotive.ethereum.EthereumNodeManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +28,7 @@ public class AutomotiveApplication extends Application implements EthereumServic
     @Override
     public void onCreate() {
         super.onCreate();
-
-        Log.d("TOTO","create");
-
         onResume();
-
     }
 
     public void onResume(){
@@ -86,15 +79,14 @@ public class AutomotiveApplication extends Application implements EthereumServic
     public EthereumService getEthereumService() {
         return ethereumService;
     }
-
     public boolean isEthereumServiceStarted() {
         return ethereumServiceStarted;
     }
 
     @Override
-    public void onEthereumServiceReady(EthereumNodeManager ethereumNodeManager) {
+    public void onEthereumServiceReady() {
         for( EthereumService.EthereumServiceInterface client : this.ethereumServiceCallbacks ){
-            client.onEthereumServiceReady(ethereumNodeManager);
+            client.onEthereumServiceReady();
         }
     }
 }
