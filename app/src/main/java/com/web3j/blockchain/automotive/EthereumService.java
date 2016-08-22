@@ -74,7 +74,6 @@ public class EthereumService extends Service {
             }
         });
         gethThread.start();
-        Log.d(TAG,gethThread.getName());
     }
 
     @Override
@@ -105,7 +104,6 @@ public class EthereumService extends Service {
                 try {
                     int attempts = 0;
                     while( !new File(dataDir+"/"+GETH_IPC_FILE).exists() ){
-                        Log.d(TAG,"attenmpt : "+(++attempts));
                         Thread.sleep(500);
                     }
                     dispatchCallback();
