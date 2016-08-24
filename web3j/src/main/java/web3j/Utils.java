@@ -59,7 +59,7 @@ public abstract class Utils {
         } else if( arg instanceof Integer){
             return String.valueOf(arg);
         } else if( arg instanceof BigInteger ){
-            return arg.toString();
+            return "\"0x"+((BigInteger)arg).toString(16)+"\"";
         }
         return "";
     }

@@ -48,8 +48,8 @@ public class InvocationHandlerTest {
 
     @Test
     public void synchronousMethodReturnedObjectTest() throws Exception{
-        Block block = new Block();
-        Request blockRequest = new Request<Block>("", "", Block.class);
+        final Block block = new Block();
+        Request blockRequest = new Request<Block>("","", Block.class);
         Observable.OnSubscribe subscriber = new Observable.OnSubscribe<Block>() {
             @Override
             public void call(Subscriber<? super Block> subscriber) {
@@ -59,7 +59,7 @@ public class InvocationHandlerTest {
         };
         Observable observable = Observable.create(subscriber);
         when(mockProvider.sendRequest(blockRequest)).thenReturn(observable);
-        Observable<Block> b = web3j.eth.getBlock("0x63cb70cdcef14c3ba7572b5171cf09df2bc7685a8e790588260a1396856c2482");
+        Observable<Block> b = web3j.eth.getBlockByHash("");
         b.subscribe(new Subscriber<Block>() {
             @Override
             public void onCompleted() {
@@ -85,14 +85,14 @@ public class InvocationHandlerTest {
         Observable observable = Observable.just(block);
         when(mockProvider.sendRequest(getBlockRequest)).thenReturn(observable);
 
-        Block returnedBlock = web3j.eth.block("");
+        Block returnedBlock = web3j.eth.blockByHash("");
         assertTrue(returnedBlock.equals(block));
     }
 
     @Test
     public void synchronousMethodRequestTest() throws Exception{
         //TODO error with eth.block
-        web3j.eth.block("0x63cb70cdcef14c3ba7572b5171cf09df2bc7685a8e790588260a1396856c2482");
+        web3j.eth.getBlockByHash("0x63cb70cdcef14c3ba7572b5171cf09df2bc7685a8e790588260a1396856c2482");
         verify(mockProvider).sendRequest(captor.capture());
         Request<Block> req = captor.<Request<Block>>getValue();
         assertEquals(req.getReturnType(),Block.class);
@@ -103,7 +103,7 @@ public class InvocationHandlerTest {
 
     @Test
     public void asynchronousMethodRequestTest() throws Exception{
-        web3j.eth.getBlock("0x63cb70cdcef14c3ba7572b5171cf09df2bc7685a8e790588260a1396856c2482");
+        web3j.eth.getBlockByHash("0x63cb70cdcef14c3ba7572b5171cf09df2bc7685a8e790588260a1396856c2482");
         verify(mockProvider).sendRequest(captor.capture());
         Request<Block> req = captor.<Request<Block>>getValue();
         assertEquals(req.getReturnType(),Block.class);
@@ -116,7 +116,7 @@ public class InvocationHandlerTest {
 
     @Test
     public void asynchronousMethodRequestBigIntegerTest() throws Exception{
-        web3j.eth.getBlock(new BigInteger("0"));
+        web3j.eth.getBlockByNumber(new BigInteger("0"));
         verify(mockProvider).sendRequest(captor.capture());
         Request<Block> req = captor.<Request<Block>>getValue();
         assertEquals(req.getReturnType(),Block.class);

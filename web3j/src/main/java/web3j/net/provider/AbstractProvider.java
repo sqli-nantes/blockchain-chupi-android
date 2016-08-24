@@ -15,7 +15,7 @@ public abstract  class AbstractProvider implements Provider{
 
     protected Map<Integer, Request> requestQueue;
 
-    private static int requestNumber = 1;
+    private int requestNumber = 0;
 
     public AbstractProvider() {
         requestQueue = new HashMap<>();
@@ -26,7 +26,7 @@ public abstract  class AbstractProvider implements Provider{
     @Override
     public Observable sendRequest(final Request request) {
 
-        request.setId(requestNumber);
+        request.setId(getARequestNumber());
 
         String stringRequest =  "{" +
                 "\"jsonrpc\":\"2.0\"," +
@@ -38,7 +38,6 @@ public abstract  class AbstractProvider implements Provider{
         sendThroughMedia(stringRequest);
 
         requestQueue.put(request.getId(),request);
-        requestNumber++;
 
         Observable ret = Observable.create(new Observable.OnSubscribe<Object>() {
             @Override
@@ -48,5 +47,9 @@ public abstract  class AbstractProvider implements Provider{
         });
 
         return ret;
+    }
+
+    public synchronized int getARequestNumber() {
+        return requestNumber++;
     }
 }

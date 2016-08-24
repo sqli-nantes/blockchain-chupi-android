@@ -17,19 +17,22 @@ public interface Eth {
     BigInteger balance(String account);
     Observable<BigDecimal> getBalance(String account);
 
-    @EthereumMethod(name="getBlock")
-    Block block(String hash);
-    Observable<Block> getBlock(String hash);
-    @EthereumMethod(name="getBlock")
-    Block block(BigInteger number);
-    Observable<Block> getBlock(BigInteger number);
+    @EthereumMethod(name="getBlockByHash")
+    Block blockByHash(String hash,boolean withTxObjects);
+    Observable<Block> getBlockByHash(String hash,boolean withTxObjects);
 
-    @EthereumMethod(name="getTransaction")
-    Transaction transaction(String hash);
-    Observable<Transaction> getTransaction(String hash);
+    @EthereumMethod(name="getBlockByNumber")
+    Block blockByNumber(BigInteger number,boolean withTxObjects);
+    Observable<Block> getBlockByNumber(BigInteger number,boolean withTxObjects);
+
+    @EthereumMethod(name="getTransactionByHash")
+    Transaction transactionByHash(String hash);
+    Observable<Transaction> getTransactionByHash(String hash);
 
     @EthereumMethod(name="getTransactionReceipt")
     TransactionReceipt transactionReceipt(String hash);
     Observable<TransactionReceipt> getTransactionReceipt(String hash);
+
+
 
 }

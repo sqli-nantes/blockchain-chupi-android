@@ -6,6 +6,9 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 
+import web3j.Web3J;
+import web3j.net.provider.AndroidIpcProvider;
+
 
 /**
  * Created by gunicolas on 22/08/16.
@@ -18,7 +21,7 @@ public abstract class EthereumActivity extends AppCompatActivity implements Ethe
     ServiceConnection ethereumServiceConnection;
     Intent ethereumServiceIntent;
 
-    //protected Web3J web3J;
+    protected Web3J web3J;
 
 
     @Override
@@ -60,8 +63,8 @@ public abstract class EthereumActivity extends AppCompatActivity implements Ethe
     public void onEthereumServiceReady() {
         ethereumService.unregisterClient(this);
         String dir = ethereumService.getIpcFilePath();
-        /*Web3J.Builder builder = new Web3J.Builder();
+        Web3J.Builder builder = new Web3J.Builder();
         builder.provider(new AndroidIpcProvider(dir));
-        web3J = builder.build();*/
+        web3J = builder.build();
     }
 }

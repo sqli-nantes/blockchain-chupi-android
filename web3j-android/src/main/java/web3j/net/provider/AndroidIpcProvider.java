@@ -5,17 +5,22 @@ import android.net.LocalSocketAddress;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.InstanceCreator;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import rx.Subscriber;
 import web3j.exception.Web3JException;
+import web3j.gson.BigIntegerTypeAdapter;
 import web3j.net.Request;
 import web3j.net.Response;
 
@@ -37,11 +42,15 @@ public class AndroidIpcProvider extends AbstractProvider {
 
     boolean listen;
 
+    Gson gson;
+
     public AndroidIpcProvider(String _ipcFilePath) throws Web3JException {
         super();
         this.ipcFilePath = _ipcFilePath;
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeHierarchyAdapter(BigInteger.class,new BigIntegerTypeAdapter());
+        gson = gsonBuilder.create();
         createSocket();
-        listen = true;
         listenSocket();
     }
 
@@ -57,6 +66,7 @@ public class AndroidIpcProvider extends AbstractProvider {
     }
 
     private void listenSocket(){
+        listen = true;
         listeningThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -80,7 +90,8 @@ public class AndroidIpcProvider extends AbstractProvider {
                                         subscriber.onError(new Web3JException(response.error.message));
                                     }
                                 } else {
-                                    Object data = new Gson().fromJson(response.result, request.getReturnType());
+
+                                    Object data = gson.fromJson(response.result, request.getReturnType());
                                     for(Subscriber subscriber : subscribers) {
                                         subscriber.onNext(data);
                                         subscriber.onCompleted();
@@ -94,7 +105,7 @@ public class AndroidIpcProvider extends AbstractProvider {
                     }
                 }
                 catch(Exception e){
-                   e.getStackTrace();
+                    Log.e(TAG,e.getLocalizedMessage());
                 }
             }
         });
