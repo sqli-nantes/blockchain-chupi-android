@@ -5,7 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/blockchain-xXx-Mobile.iml" filepath="$PROJECT_DIR$/blockchain-xXx-Mobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/gethandroid/gethandroid.iml" filepath="$PROJECT_DIR$/gethandroid/gethandroid.iml" />
-      <module fileurl="file://$PROJECT_DIR$/web3android/web3android.iml" filepath="$PROJECT_DIR$/web3android/web3android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web3j/web3j.iml" filepath="$PROJECT_DIR$/web3j/web3j.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web3j/web3j-.iml" filepath="$PROJECT_DIR$/web3j/web3j-.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web3j-android/web3j-android.iml" filepath="$PROJECT_DIR$/web3j-android/web3j-android.iml" />
     </modules>
   </component>
 </project>

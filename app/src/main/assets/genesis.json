@@ -1,14 +1,9 @@
-{ 
-
-	"nonce": "0x0000000000000042", 
-	"timestamp": "0x0", 
-	"parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000", 
-	"extraData": "S Q L I blockchain", 
-	"gasLimit": "0x8000000", 
-	"difficulty": "0x100", 
-	"mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000", 
-	"coinbase": "0x0000000000000000000000000000000000000042", 
-	"alloc": { 
-
-	} 
+{
+	"nonce": "0x00",
+	"difficulty": "0x1000",
+	"mixHash": "0x00",
+	"timestamp": "0x00",
+	"parentHash": "0x00",
+	"extraData": "0x00",
+	"gasLimit": "0x1000000000"
 }

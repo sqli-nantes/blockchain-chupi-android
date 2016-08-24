@@ -128,15 +128,17 @@ public class EthereumService extends Service {
         return ipcFile.delete();
     }
 
-    @Override
-    public void onDestroy() {
 
+    public void stop(){
         gethThread.interrupt();
         if( deleteIpcFile() ) {
+            Log.d(TAG,"ipc file deleted");
             checkFileThread.interrupt();
         } else Log.e(TAG,"delete ipc file error");
+    }
 
-        super.onDestroy();
+    public String getIpcFilePath(){
+        return dataDir + "/"+ GETH_IPC_FILE;
     }
 
 }

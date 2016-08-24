@@ -1,1 +1,1 @@
-include ':app', ':web3android'
+include ':app', ':web3j-android', ':web3j'

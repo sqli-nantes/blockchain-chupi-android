@@ -6,6 +6,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 
+
 /**
  * Created by gunicolas on 22/08/16.
  */
@@ -16,6 +17,8 @@ public abstract class EthereumActivity extends AppCompatActivity implements Ethe
     EthereumService ethereumService;
     ServiceConnection ethereumServiceConnection;
     Intent ethereumServiceIntent;
+
+    //protected Web3J web3J;
 
 
     @Override
@@ -43,18 +46,22 @@ public abstract class EthereumActivity extends AppCompatActivity implements Ethe
 
     }
 
-
     @Override
     protected void onStop() {
+        ethereumService.stop();
+        ethereumService.stopSelf();
         unbindService(ethereumServiceConnection);
         stopService(ethereumServiceIntent);
 
         super.onStop();
     }
 
-
     @Override
     public void onEthereumServiceReady() {
         ethereumService.unregisterClient(this);
+        String dir = ethereumService.getIpcFilePath();
+        /*Web3J.Builder builder = new Web3J.Builder();
+        builder.provider(new AndroidIpcProvider(dir));
+        web3J = builder.build();*/
     }
 }
