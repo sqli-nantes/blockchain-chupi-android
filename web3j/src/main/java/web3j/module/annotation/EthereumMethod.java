@@ -1,4 +1,4 @@
-package web3j.module;
+package web3j.module.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,6 +12,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface EthereumMethod {
 
-    public String name();
+    String name();
 
 }

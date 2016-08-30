@@ -3,14 +3,15 @@ package web3j.module.objects;
 import java.math.BigInteger;
 import java.util.List;
 
+
 /**
  * Created by gunicolas on 23/08/16.
  */
-public class Block {
+public class Block<T extends Web3JType> {
 
     public BigInteger number;
-    public String hash;
-    public String parentHash;
+    public Hash hash;
+    public Hash parentHash;
     public String nonce;
     public String sha3Uncles;
     public String logsBloom;
@@ -24,7 +25,7 @@ public class Block {
     public BigInteger gasLimit;
     public BigInteger gasUsed;
     public BigInteger timestamp;
-    public List<String> transactions; //TODO Add List of transaction object support
+    public List<T> transactions;
     public List<String> uncles;
 
 

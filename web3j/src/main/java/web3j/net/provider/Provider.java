@@ -14,6 +14,6 @@ public interface Provider {
      * @param <T>
      * @return By contract, cannot be <code>null</code>. The @Observable to subscribe to get the response.
      */
-    <T> Observable<T> sendRequest(Request<T> request);
+    <T> Observable<T> sendRequest(Request request);
 
 }

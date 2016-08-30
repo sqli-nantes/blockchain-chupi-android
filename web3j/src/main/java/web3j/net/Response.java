@@ -1,19 +1,25 @@
 package web3j.net;
 
-import com.google.gson.JsonElement;
-
 /**
  * Created by gunicolas on 18/08/16.
  */
-public class Response {
+public class Response<T> {
 
     public int id;
-    public JsonElement result;
+    public T result;
     public Error error;
+    public Request request;
 
     public class Error{
         public int code;
         public String message;
+    }
+
+    public Response(int id, T result,Error error,Request request) {
+        this.id = id;
+        this.result = result;
+        this.error = error;
+        this.request = request;
     }
 
     public boolean isError(){

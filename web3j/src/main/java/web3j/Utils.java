@@ -2,12 +2,14 @@ package web3j;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.math.BigInteger;
 import java.util.Arrays;
 
 import rx.Observable;
 import web3j.exception.Web3JException;
-import web3j.module.EthereumMethod;
+import web3j.module.annotation.EthereumMethod;
+import web3j.module.converter.ParameterConverter;
 
 /**
  * Created by gunicolas on 22/08/16.
@@ -16,25 +18,13 @@ import web3j.module.EthereumMethod;
 public abstract class Utils {
 
 
-    /*
-        Remove get keyword in a "get..." method name and remove Upper case of first letter
-        Ex: getNodeInfos --> nodeInfos
-    */
-    public static String formatAsyncMethod(String asyncMethod){
-        int index = asyncMethod.indexOf("Async");
-        if( index != -1 ){
-            asyncMethod = asyncMethod.substring(0,index);
-        }
-        return asyncMethod;
-    }
-
     @SuppressWarnings("unchecked")
-    public static <T> Class<T> extractReturnType(Method m){
+    public static Type extractReturnType(Method m){
         if( m.getReturnType().isAssignableFrom(Observable.class) ) {
             ParameterizedType returnParameterizedType = (ParameterizedType) m.getGenericReturnType();
-            return (Class<T>) returnParameterizedType.getActualTypeArguments()[0];
+            return returnParameterizedType.getActualTypeArguments()[0];
         }
-        return (Class<T>) m.getGenericReturnType();
+        return m.getGenericReturnType();
     }
 
     public static String formatArgsToString(Object[] args) {
@@ -54,14 +44,13 @@ public abstract class Utils {
 
     }
     public static String formatArgToString(Object arg){
+        if( arg == null ) return "\"\"";
         if( arg instanceof String ){
             return "\""+ arg +"\"";
-        } else if( arg instanceof Integer){
-            return String.valueOf(arg);
         } else if( arg instanceof BigInteger ){
             return "\"0x"+((BigInteger)arg).toString(16)+"\"";
         }
-        return "";
+        return String.valueOf(arg);
     }
 
     public static String extractMethodName(Method method) {

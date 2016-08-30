@@ -18,11 +18,11 @@ public class SolidityFunction {
 /*
     public SolidityFunction(JSONObject signature) throws JSONException {
 
-        this.name = Utils.transformToFullName(signature);
+        this.name = SolidityUtils.transformToFullName(signature);
         this.constant = signature.getBoolean("constant");
 
-        *//*this.inputTypes = Utils.extractParametersTypes(signature.getJSONArray("inputs"));
-        this.outputTypes = Utils.extractParametersTypes(signature.getJSONArray("outputs"));
+        *//*this.inputTypes = SolidityUtils.extractParametersTypes(signature.getJSONArray("inputs"));
+        this.outputTypes = SolidityUtils.extractParametersTypes(signature.getJSONArray("outputs"));
 *//*
     }
 

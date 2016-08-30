@@ -3,36 +3,22 @@ package web3j.module.objects;
 import java.math.BigInteger;
 
 /**
- * Created by gunicolas on 23/08/16.
+ * Created by gunicolas on 26/08/16.
  */
-public class Transaction {
+public class Transaction extends Web3JType {
 
-    public String hash;
+    public Hash hash;
     public BigInteger nonce;
-    public String blockHash;
+    public Hash blockHash;
     public BigInteger blockNumber;
     public BigInteger transactionIndex;
     public String from;
     public String to;
     public BigInteger value;
     public BigInteger gasPrice;
+    public BigInteger gas;
     public BigInteger number;
-    public String input;
+    public String data;
 
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "hash='" + hash + '\'' +
-                ", nonce=" + nonce +
-                ", blockHash='" + blockHash + '\'' +
-                ", blockNumber=" + blockNumber +
-                ", transactionIndex=" + transactionIndex +
-                ", from='" + from + '\'' +
-                ", to='" + to + '\'' +
-                ", value=" + value +
-                ", gasPrice=" + gasPrice +
-                ", number=" + number +
-                ", input='" + input + '\'' +
-                '}';
-    }
+
 }

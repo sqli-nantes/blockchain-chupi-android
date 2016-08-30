@@ -6,7 +6,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 import web3j.solidity.SolidityParam;
-import web3j.solidity.Utils;
+import web3j.solidity.SolidityUtils;
 
 /**
  * Created by gunicolas on 08/08/16.
@@ -19,11 +19,11 @@ public abstract class SolidityFormatters {
             @Override
             public SolidityParam format(String value) {
 
-                BigDecimal twoCompDec = Utils.toTwosComplement(value);
+                BigDecimal twoCompDec = SolidityUtils.toTwosComplement(value);
                 MathContext mc = new MathContext(0, RoundingMode.DOWN);
                 BigDecimal twoCompDecRounded = twoCompDec.round(mc);
-                String twoCompDecRoundedHexa = Utils.bigDecimalToHexString(twoCompDecRounded); //TODO check function done
-                String result = Utils.padLeftWithZeros(twoCompDecRoundedHexa,64);
+                String twoCompDecRoundedHexa = SolidityUtils.bigDecimalToHexString(twoCompDecRounded); //TODO check function done
+                String result = SolidityUtils.padLeftWithZeros(twoCompDecRoundedHexa,64);
                 return new SolidityParam(result);
             }
         };
@@ -33,9 +33,9 @@ public abstract class SolidityFormatters {
         return new InputFormatter() {
             @Override
             public SolidityParam format(String value) {
-                String result = Utils.toHex(value).substring(2); //TODO Check function done
+                String result = SolidityUtils.toHex(value).substring(2); //TODO Check function done
                 double l = Math.floor((result.length()+63)/64);
-                result = Utils.padRightWithZeros(result,(int)l * 64);
+                result = SolidityUtils.padRightWithZeros(result,(int)l * 64);
                 return new SolidityParam(result);
             }
         };
@@ -45,10 +45,10 @@ public abstract class SolidityFormatters {
         return new InputFormatter() {
             @Override
             public SolidityParam format(String value) {
-                String result = Utils.toHex(value).substring(2); //TODO check function done
+                String result = SolidityUtils.toHex(value).substring(2); //TODO check function done
                 int length = result.length() / 2;
                 double l = Math.floor((result.length() + 63) / 64);
-                result = Utils.padRightWithZeros(result, (int) l * 64);
+                result = SolidityUtils.padRightWithZeros(result, (int) l * 64);
                 return new SolidityParam(getInputIntFormatter().format(String.valueOf(length)).getValue() + result);
             }
         };
@@ -59,10 +59,10 @@ public abstract class SolidityFormatters {
         return new InputFormatter(){
             @Override
             public SolidityParam format(String value){
-                String result=Utils.utf8ToHex(value).substring(2);
+                String result= SolidityUtils.utf8ToHex(value).substring(2);
                 int length=result.length()/2;
                 double l=Math.floor((result.length()+63)/64);
-                result=Utils.padRightWithZeros(result,(int)l*64);
+                result= SolidityUtils.padRightWithZeros(result,(int)l*64);
                 return new SolidityParam(getInputIntFormatter().format(String.valueOf(length)).getValue()+result);
             }
         };
@@ -83,7 +83,7 @@ public abstract class SolidityFormatters {
         return new InputFormatter() {
             @Override
             public SolidityParam format(String value) {
-                BigDecimal bigD = Utils.toBigDecimal(value);
+                BigDecimal bigD = SolidityUtils.toBigDecimal(value);
                 BigDecimal bigDReal = bigD.multiply(new BigDecimal(2).pow(128));
 
                 return getInputIntFormatter().format(bigDReal.toPlainString());
@@ -98,12 +98,12 @@ public abstract class SolidityFormatters {
 
                 String value = param.staticPart();
 
-                if( Utils.isHexNegative(value) ){
-                    BigDecimal valueBD = Utils.hexToBigDecimal(value);
-                    valueBD = valueBD.subtract(Utils.hexToBigDecimal("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
+                if( SolidityUtils.isHexNegative(value) ){
+                    BigDecimal valueBD = SolidityUtils.hexToBigDecimal(value);
+                    valueBD = valueBD.subtract(SolidityUtils.hexToBigDecimal("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
                     return valueBD.subtract(new BigDecimal(1));
                 }
-                return Utils.hexToBigDecimal(value);
+                return SolidityUtils.hexToBigDecimal(value);
             }
         };
     }
@@ -113,7 +113,7 @@ public abstract class SolidityFormatters {
             @Override
             public BigDecimal format(SolidityParam param) {
                 String value = param.staticPart();
-                return Utils.hexToBigDecimal(value);
+                return SolidityUtils.hexToBigDecimal(value);
             }
         };
     }
@@ -161,7 +161,7 @@ public abstract class SolidityFormatters {
             @Override
             public String format(SolidityParam param) {
                 String paramDynamicPart = param.dynamicPart().substring(0,64);
-                BigDecimal paramBD = Utils.hexToBigDecimal(paramDynamicPart);
+                BigDecimal paramBD = SolidityUtils.hexToBigDecimal(paramDynamicPart);
                 int length = paramBD.multiply(new BigDecimal(2)).intValue();
                 return "0x"+param.dynamicPart().substring(64,length);
 
@@ -174,9 +174,9 @@ public abstract class SolidityFormatters {
             @Override
             public String format(SolidityParam param) {
                 String paramDynamicPart = param.dynamicPart().substring(0,64);
-                BigDecimal paramBD = Utils.hexToBigDecimal(paramDynamicPart);
+                BigDecimal paramBD = SolidityUtils.hexToBigDecimal(paramDynamicPart);
                 int length = paramBD.multiply(new BigDecimal(2)).intValue();
-                return Utils.hexToUtf8(param.dynamicPart().substring(64,length));
+                return SolidityUtils.hexToUtf8(param.dynamicPart().substring(64,length));
             }
         };
     }

@@ -38,9 +38,9 @@ public class SolidityParam {
         return new SolidityParam(this.value+param.value);
     }
     public String offsetAsBytes(){
-        BigDecimal twoComp = Utils.toTwosComplement(String.valueOf(this.offsetLength));
-        String twoCompHex = Utils.bigDecimalToHexString(twoComp); //TODO check function done
-        return !this.isDynamic() ? "" : Utils.padLeftWithZeros(twoCompHex,64);
+        BigDecimal twoComp = SolidityUtils.toTwosComplement(String.valueOf(this.offsetLength));
+        String twoCompHex = SolidityUtils.bigDecimalToHexString(twoComp); //TODO check function done
+        return !this.isDynamic() ? "" : SolidityUtils.padLeftWithZeros(twoCompHex,64);
     }
     public String staticPart(){
         if( !this.isDynamic() ) return this.value;

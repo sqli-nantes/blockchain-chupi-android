@@ -1,5 +1,6 @@
 package web3j.net;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,15 +9,15 @@ import rx.Subscriber;
 /**
  * Created by gunicolas on 23/08/16.
  */
-public class Request<T> {
+public class Request {
 
     String methodCall;
     String arguments;
-    Class<T> returnType;
+    Type returnType;
     List<Subscriber> subscribers;
     int id;
 
-    public Request(String methodCall, String arguments, Class<T> returnType) {
+    public Request(String methodCall, String arguments, Type returnType) {
         this.methodCall = methodCall;
         this.arguments = arguments;
         this.returnType = returnType;
@@ -31,7 +32,7 @@ public class Request<T> {
         return arguments;
     }
 
-    public Class<T> getReturnType() {
+    public Type getReturnType() {
         return returnType;
     }
 
@@ -50,4 +51,5 @@ public class Request<T> {
     public void setId(int id) {
         this.id = id;
     }
+
 }

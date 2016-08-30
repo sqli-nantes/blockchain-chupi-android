@@ -17,33 +17,33 @@ import web3j.sha3.Sha3;
 /**
  * Created by gunicolas on 08/08/16.
  */
-public abstract class Utils {
+public abstract class SolidityUtils {
 
     public static final HashMap<String,BigDecimal> UNIT = new HashMap<String,BigDecimal>(){{
-        put("noether", new BigDecimal(0));
-        put("wei", new BigDecimal(1));
-        put("kwei", new BigDecimal("1E+3"));
-        put("babbage", new BigDecimal("1E+3"));
-        put("femtoether", new BigDecimal("1E+3"));
-        put("mwei", new BigDecimal("1E+6"));
-        put("lovelace", new BigDecimal("1E+6"));
-        put("picoether", new BigDecimal("1E+6"));
-        put("gwei", new BigDecimal("1E+9"));
-        put("shannon", new BigDecimal("1E+9"));
-        put("nanoether", new BigDecimal("1E+9"));
-        put("nano", new BigDecimal("1E+9"));
-        put("szabo", new BigDecimal("1E+12"));
-        put("microether", new BigDecimal("1E+12"));
-        put("micro", new BigDecimal("1E+12"));
-        put("finney", new BigDecimal("1E+15"));
-        put("milliether", new BigDecimal("1E+15"));
-        put("milli", new BigDecimal("1E+15"));
-        put("ether", new BigDecimal("1E+18"));
-        put("kether", new BigDecimal("1E+21"));
-        put("grand", new BigDecimal("1E+21"));
-        put("mether", new BigDecimal("1E+24"));
-        put("gether", new BigDecimal("1E+27"));
-        put("tether", new BigDecimal("1E+30"));
+        put("noether", new BigDecimal(  0));
+        put("wei", new BigDecimal(      1));
+        put("kwei", new BigDecimal(     "1000"));
+        put("babbage", new BigDecimal(  "1000"));
+        put("femtoether",new BigDecimal("1000"));
+        put("mwei", new BigDecimal(     "1000000"));
+        put("lovelace", new BigDecimal( "1000000"));
+        put("picoether", new BigDecimal("1000000"));
+        put("gwei", new BigDecimal(     "1000000000"));
+        put("shannon", new BigDecimal(  "1000000000"));
+        put("nanoether", new BigDecimal("1000000000"));
+        put("nano", new BigDecimal(     "1000000000"));
+        put("szabo", new BigDecimal(    "1000000000000"));
+        put("microether",new BigDecimal("1000000000000"));
+        put("micro", new BigDecimal(    "1000000000000"));
+        put("finney", new BigDecimal(   "1000000000000000"));
+        put("milliether",new BigDecimal("1000000000000000"));
+        put("milli", new BigDecimal(    "1000000000000000"));
+        put("ether", new BigDecimal(    "1000000000000000000"));
+        put("kether", new BigDecimal(   "1000000000000000000000"));
+        put("grand", new BigDecimal(    "1000000000000000000000"));
+        put("mether", new BigDecimal(   "1000000000000000000000000"));
+        put("gether", new BigDecimal(   "1000000000000000000000000000"));
+        put("tether", new BigDecimal(   "1000000000000000000000000000000"));
     }};
 
 
@@ -159,7 +159,7 @@ public abstract class Utils {
             number = number.replace(".","");
             number += "E"+(floatIndex-number.length());
         }
-        return formatDecimalNumber(new BigDecimal(number));
+        return new BigDecimal(number);
     }
     /*
     * Get BigDecimal from hexadecimal string
@@ -306,7 +306,7 @@ public abstract class Utils {
         if( numberBD != null ){
             BigDecimal unitBD = getValueOfUnit(unit);
             if( unitBD != null ) {
-                return formatDecimalNumber(numberBD.divide(unitBD));
+                return numberBD.divide(unitBD);
             }
             throw new IllegalArgumentException(unit+" is not a valid unit");
         }
@@ -318,16 +318,12 @@ public abstract class Utils {
         if( numberBD != null ){
             BigDecimal unitBD = getValueOfUnit(unit);
             if( unitBD != null ){
-                return formatDecimalNumber(numberBD.multiply(unitBD));
+                return numberBD.multiply(unitBD);
             }
             throw new IllegalArgumentException(unit+" is not a valid unit");
         }
 
         throw new IllegalArgumentException(number+" is not a valid number");
-    }
-
-    private static BigDecimal formatDecimalNumber(BigDecimal value){
-        return value.setScale(20, RoundingMode.HALF_DOWN).stripTrailingZeros();
     }
 
     public static BigDecimal toTwosComplement(String value){
@@ -419,7 +415,6 @@ public abstract class Utils {
         return obj instanceof JSONObject;
     }
 
-
     public static boolean isJsonString(String value){
         try{
             new JSONObject(value);
@@ -429,8 +424,6 @@ public abstract class Utils {
         }
     }
 
-
-
     public static boolean isStringNumber(String value){
         Pattern integer = Pattern.compile("^(-|\\+)?[0-9]*$");
         Pattern decimal = Pattern.compile("^(-|\\+)?[0-9]*\\.[0-9]*$");
@@ -438,7 +431,6 @@ public abstract class Utils {
         boolean isDecimal = decimal.matcher(value).matches();
         return isInteger || isDecimal;
     }
-
 
     public static boolean isHexNegative(String value){
         BigDecimal valueBD = hexToBigDecimal(value.substring(0,1));

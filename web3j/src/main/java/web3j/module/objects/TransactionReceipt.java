@@ -7,16 +7,17 @@ import java.math.BigInteger;
  */
 public class TransactionReceipt {
 
-    public String blockHash;
+    public Hash blockHash;
     public BigInteger blockNumber;
-    public String transactionHash;
+    public Hash transactionHash;
     public BigInteger transactionIndex;
     public String from;
     public String to;
+
+
     public BigInteger cumulativeGasUsed;
     public BigInteger gasUsed;
     public String contractAddress;
-    //List<Log> logs; //TODO find Log object
 
 
     @Override

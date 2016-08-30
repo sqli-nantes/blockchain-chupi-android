@@ -1,6 +1,6 @@
 {
 	"nonce": "0x00",
-	"difficulty": "0x1000",
+	"difficulty": "0x0",
 	"mixHash": "0x00",
 	"timestamp": "0x00",
 	"parentHash": "0x00",

@@ -21,6 +21,9 @@ import java.util.List;
 import rx.Subscriber;
 import web3j.exception.Web3JException;
 import web3j.gson.BigIntegerTypeAdapter;
+import web3j.gson.HashTypeAdapter;
+import web3j.gson.ResponseTypeAdapter;
+import web3j.module.objects.Hash;
 import web3j.net.Request;
 import web3j.net.Response;
 
@@ -42,14 +45,9 @@ public class AndroidIpcProvider extends AbstractProvider {
 
     boolean listen;
 
-    Gson gson;
-
     public AndroidIpcProvider(String _ipcFilePath) throws Web3JException {
         super();
         this.ipcFilePath = _ipcFilePath;
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeHierarchyAdapter(BigInteger.class,new BigIntegerTypeAdapter());
-        gson = gsonBuilder.create();
         createSocket();
         listenSocket();
     }
@@ -76,28 +74,22 @@ public class AndroidIpcProvider extends AbstractProvider {
                         while (in.ready() && (line = in.readLine()) != null) {
 
                             Log.d(TAG,line);
-                            Response response = new Gson().fromJson(line, Response.class);
+                            Response response = gson.fromJson(line, Response.class);
 
-                            int requestId = response.id;
+                            if( response.request != null ) {
 
-                            Request request = requestQueue.get(requestId);
-
-                            if( request != null ) {
-
-                                List<Subscriber> subscribers = request.getSubscribers();
+                                List<Subscriber> subscribers = response.request.getSubscribers();
                                 if ( response.isError() ) {
                                     for(Subscriber subscriber : subscribers) {
                                         subscriber.onError(new Web3JException(response.error.message));
                                     }
                                 } else {
-
-                                    Object data = gson.fromJson(response.result, request.getReturnType());
                                     for(Subscriber subscriber : subscribers) {
-                                        subscriber.onNext(data);
+                                        subscriber.onNext(response.result);
                                         subscriber.onCompleted();
                                     }
                                 }
-                                requestQueue.remove(requestId);
+                                requestQueue.remove(response.id);
 
                             } // else just ignored
                         }
