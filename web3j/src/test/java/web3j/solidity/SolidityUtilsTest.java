@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by gunicolas on 11/08/16.
  */
-public class SoliditySolidityUtilsTest {
+public class SolidityUtilsTest {
 
     @Test
     public void testToBigDecimal() throws Exception{

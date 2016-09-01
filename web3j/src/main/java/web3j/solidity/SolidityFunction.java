@@ -1,56 +1,35 @@
 package web3j.solidity;
 
-import java.util.List;
+import java.lang.reflect.Method;
+
+import web3j.module.Eth;
+import web3j.module.objects.Hash;
+import web3j.module.objects.TransactionRequest;
 
 /**
  * Created by gunicolas on 4/08/16.
  */
-public class SolidityFunction {
 
-    private String name;
-    private boolean constant;
+/**+
+ *
+ * @param <T> return type
+ */
+public class SolidityFunction<T> {
 
-    private List<String> inputTypes;
-    private List<String> outputTypes;
+    Method method;
+    Eth eth;
+    String address;
+    Object args;
 
-    private String address;
-
-/*
-    public SolidityFunction(JSONObject signature) throws JSONException {
-
-        this.name = SolidityUtils.transformToFullName(signature);
-        this.constant = signature.getBoolean("constant");
-
-        *//*this.inputTypes = SolidityUtils.extractParametersTypes(signature.getJSONArray("inputs"));
-        this.outputTypes = SolidityUtils.extractParametersTypes(signature.getJSONArray("outputs"));
-*//*
+    public SolidityFunction(Method method, Object[] args,Eth eth, String address) {
+        this.method = method;
+        this.eth = eth;
+        this.address = address;
+        this.args = args;
     }
 
-    public void setAddress(String _address){
-        this.address = _address;
+    public Hash sendTransaction(TransactionRequest request){
+        return eth.sendTransaction(request);
     }
 
-    private JSONObject toPayload() throws JSONException {
-        JSONObject ret = new JSONObject();
-        ret.put("to",this.address);
-        //ret.put("data","0x"+this.signature());
-        // TODO
-        return ret;
-
-    }*/
-
-    /*private String signature(){
-        return hash(this.name).substring(0,8);
-    }*/
-
-
-
-
-    public void call(){
-
-    }
-
-    public void sendTransaction(){
-
-    }
 }

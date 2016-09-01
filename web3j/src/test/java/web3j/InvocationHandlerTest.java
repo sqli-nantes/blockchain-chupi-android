@@ -16,6 +16,7 @@ import rx.Observable;
 import rx.Subscriber;
 import web3j.module.objects.Block;
 import web3j.module.objects.Hash;
+import web3j.module.objects.TransactionRequest;
 import web3j.net.Request;
 import web3j.net.provider.Provider;
 
@@ -130,20 +131,18 @@ public class InvocationHandlerTest {
     public void sendTransactionTest() throws Exception{
         String from = "0xf1e04ff9007ee1e0864cd39270a407c71b14b7e2";
         String to = "0xf1e04ff9007ee1e0864cd39270a407c71b14b7e2";
-        String gas = "0x121584";
-        String gasPrice = "0xa54e";
-        String value = null;
-        String data = null;
-        String nonce = null;
+        String value = "545";
+        String data = "hello";
 
-        web3j.eth.sendTransaction(from,to,gas,gasPrice,value,data,nonce);
+        TransactionRequest t = new TransactionRequest(from,to,value,data);
+        web3j.eth.sendTransaction(t);
 
         verify(mockProvider).sendRequest(captor.capture());
         Request req = captor.<Request>getValue();
 
         assertEquals(Hash.class,req.getReturnType());
         assertEquals("eth_sendTransaction",req.getMethodCall());
-        assertEquals("[\""+from+"\",\""+to+"\",\""+gas+"\",\""+gasPrice+"\",\"\",\"\",\"\"]",req.getArguments());
+        assertEquals("["+t.toString()+"]",req.getArguments());
         assertEquals(0,req.getId());
         assertEquals(new ArrayList<Subscriber>(),req.getSubscribers());
 

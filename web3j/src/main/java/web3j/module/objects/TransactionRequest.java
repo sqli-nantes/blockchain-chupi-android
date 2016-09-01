@@ -17,6 +17,11 @@ public class TransactionRequest {
     String valueHex;
     String dataHex;
 
+    public TransactionRequest(String fromHex, String toHex) {
+        this.fromHex = fromHex;
+        this.toHex = toHex;
+    }
+
     public TransactionRequest(String from, String to, String value, String data) {
         this(from,to,new BigInteger("90000"),value,data);
     }

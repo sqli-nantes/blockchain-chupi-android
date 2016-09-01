@@ -1,0 +1,48 @@
+package web3j.solidity;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
+
+import web3j.Web3J;
+import web3j.module.objects.TransactionRequest;
+import web3j.net.Request;
+import web3j.net.provider.Provider;
+import web3j.solidity.types.SolidityInt;
+
+/**
+ * Created by gunicolas on 30/08/16.
+ */
+public class ContractTest {
+
+    @Mock
+    Provider mockProvider;
+
+    @Captor
+    ArgumentCaptor<Request> captor;
+
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
+
+    Web3J web3J;
+
+    @Before
+    public void setup(){
+        web3J = new Web3J.Builder()
+                .provider(mockProvider)
+                .build();
+    }
+
+    @Test
+    public void contractCreationTest() throws Exception {
+        MyContract contract = (MyContract) web3J.contract.withAbi(MyContract.class).at(""); //TODO remove cast
+
+        contract.foo(new SolidityInt()).sendTransaction(new TransactionRequest("from","to"));
+
+    }
+}

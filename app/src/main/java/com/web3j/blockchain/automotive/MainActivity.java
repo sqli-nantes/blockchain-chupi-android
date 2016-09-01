@@ -117,9 +117,9 @@ public class MainActivity extends EthereumActivity implements View.OnClickListen
                 BigDecimal amount = SolidityUtils.toWei("2", "ether");
                 String amountHex = SolidityUtils.toHex(amount);
                 TransactionRequest tx = new TransactionRequest(account,"0xf1e04ff9007ee1e0864cd39270a407c71b14b7e2",amountHex,"4 u");
-                if( tx != null ) {
-                    Hash txHash = web3J.eth.sendTransaction(tx);
-                }
+
+                Hash txHash = web3J.eth.sendTransaction(tx);
+
             }
         }catch(Exception e){
             Log.e(TAG,e.getMessage());

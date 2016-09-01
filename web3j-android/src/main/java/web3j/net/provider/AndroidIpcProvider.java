@@ -2,126 +2,36 @@ package web3j.net.provider;
 
 import android.net.LocalSocket;
 import android.net.LocalSocketAddress;
-import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.InstanceCreator;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.math.BigInteger;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
 
-import rx.Subscriber;
 import web3j.exception.Web3JException;
-import web3j.gson.BigIntegerTypeAdapter;
-import web3j.gson.HashTypeAdapter;
-import web3j.gson.ResponseTypeAdapter;
-import web3j.module.objects.Hash;
-import web3j.net.Request;
-import web3j.net.Response;
 
 /**
  * Created by gunicolas on 27/07/16.
  */
-public class AndroidIpcProvider extends AbstractProvider {
+public class AndroidIpcProvider extends IpcAbstractProvider {
 
-    private static final String TAG = AndroidIpcProvider.class.getSimpleName();
-
-    private static final Charset CHARSET = StandardCharsets.UTF_8;
-
-    final String ipcFilePath;
     LocalSocket socket;
-    DataOutputStream out;
-    Thread listeningThread;
-
-    BufferedReader in;
-
-    boolean listen;
 
     public AndroidIpcProvider(String _ipcFilePath) throws Web3JException {
-        super();
-        this.ipcFilePath = _ipcFilePath;
-        createSocket();
-        listenSocket();
-    }
-
-    private void createSocket() throws Web3JException {
-        socket = new LocalSocket();
-        try {
-            socket.connect(new LocalSocketAddress(ipcFilePath, LocalSocketAddress.Namespace.FILESYSTEM));
-            out = new DataOutputStream(socket.getOutputStream());
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream(),CHARSET.name()));
-        } catch (IOException e) {
-            throw new Web3JException(e);
-        }
-    }
-
-    private void listenSocket(){
-        listen = true;
-        listeningThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (listen) {
-                        String line;
-                        while (in.ready() && (line = in.readLine()) != null) {
-
-                            Log.d(TAG,line);
-                            Response response = gson.fromJson(line, Response.class);
-
-                            if( response.request != null ) {
-
-                                List<Subscriber> subscribers = response.request.getSubscribers();
-                                if ( response.isError() ) {
-                                    for(Subscriber subscriber : subscribers) {
-                                        subscriber.onError(new Web3JException(response.error.message));
-                                    }
-                                } else {
-                                    for(Subscriber subscriber : subscribers) {
-                                        subscriber.onNext(response.result);
-                                        subscriber.onCompleted();
-                                    }
-                                }
-                                requestQueue.remove(response.id);
-
-                            } // else just ignored
-                        }
-                        Thread.sleep(500);
-                    }
-                }
-                catch(Exception e){
-                    Log.e(TAG,e.getLocalizedMessage());
-                }
-            }
-        });
-        listeningThread.start();
+        super(_ipcFilePath);
     }
 
     @Override
-    protected void sendThroughMedia(String requestString) throws Web3JException {
-        Log.d(TAG,requestString);
-
-        byte[] req = requestString.getBytes(CHARSET);
-        try {
-            out.write(req);
-        } catch (IOException e) {
-            throw new Web3JException(e);
-        }
+    protected void createSocket() throws IOException {
+        this.socket = new LocalSocket();
+        this.socket.connect(new LocalSocketAddress(ipcFilePath, LocalSocketAddress.Namespace.FILESYSTEM));
+        this.outputStream = this.socket.getOutputStream();
+        this.inputStream = this.socket.getInputStream();
     }
 
-    public void stop() throws IOException {
+    @Override
+    protected void closeSocket() throws IOException {
         if( this.socket != null ) {
             this.socket.close();
         }
-        if( this.listeningThread != null ){
-            this.listen = false;
-        }
     }
+
+
 }

@@ -30,7 +30,6 @@ public abstract  class AbstractProvider implements Provider{
 
     public AbstractProvider() {
         requestQueue = new HashMap<>();
-
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeHierarchyAdapter(BigInteger.class,new BigIntegerTypeAdapter());
         gsonBuilder.registerTypeHierarchyAdapter(Response.class,new ResponseTypeAdapter(requestQueue));

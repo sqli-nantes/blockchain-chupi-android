@@ -5,6 +5,7 @@ import java.math.BigInteger;
 
 import rx.Observable;
 import web3j.module.annotation.ConvertParam;
+import web3j.module.annotation.EthereumMethod;
 import web3j.module.converter.GetBlockClassConverter;
 import web3j.module.objects.Block;
 import web3j.module.objects.Hash;
@@ -39,7 +40,8 @@ public interface Eth {
     Observable<TransactionReceipt> getTransactionReceipt(Hash hash);
 
     Hash sendTransaction(TransactionRequest request);
-    Observable<Hash> getSendTransaction(TransactionRequest request);
+    @EthereumMethod(name="sendTransaction")
+    Observable<Hash> sendTransactionAsync(TransactionRequest request);
 
     String call(TransactionRequest request);
     String getCall(TransactionRequest request);

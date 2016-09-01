@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import web3j.Web3J;
 import web3j.net.provider.AndroidIpcProvider;
@@ -63,8 +64,19 @@ public abstract class EthereumActivity extends AppCompatActivity implements Ethe
     public void onEthereumServiceReady() {
         ethereumService.unregisterClient(this);
         String dir = ethereumService.getIpcFilePath();
+        AndroidIpcProvider provider = new AndroidIpcProvider(dir);
+        provider.listen().setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread thread, Throwable throwable) {
+                Log.e(TAG,throwable.getMessage());
+            }
+        });
         Web3J.Builder builder = new Web3J.Builder();
-        builder.provider(new AndroidIpcProvider(dir));
+        builder.provider(provider);
         web3J = builder.build();
     }
+
+
+
+
 }
