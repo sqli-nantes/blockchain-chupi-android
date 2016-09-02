@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import web3j.module.objects.NodeInfo;
-import web3j.net.provider.JavaIpcProvider;
+import web3j.net.provider.RpcProvider;
 
 /**
  * Created by gunicolas on 18/08/16.
@@ -13,12 +13,13 @@ import web3j.net.provider.JavaIpcProvider;
 public class Web3JTest {
 
     Web3J web3J;
-    JavaIpcProvider provider;
+    RpcProvider provider;
 
     @Before
     public void setup() throws Exception{
-        provider = new JavaIpcProvider("/home/gunicolas/Documents/projects/xXx/testBkc/noeud1/geth.ipc");
-        provider.listen();
+        provider = new RpcProvider("http://localhost:8545");
+        provider.init();
+        provider.startListening();
         web3J = new Web3J.Builder()
                 .provider(provider)
                 .build();
@@ -28,7 +29,6 @@ public class Web3JTest {
     public void test() throws Exception{
         NodeInfo nodeInfo = web3J.admin.nodeInfo();
         System.out.println(nodeInfo.toString());
-        provider.stop();
     }
 
     @After

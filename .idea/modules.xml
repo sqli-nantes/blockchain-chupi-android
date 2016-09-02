@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/blockchain-xXx-Mobile.iml" filepath="$PROJECT_DIR$/blockchain-xXx-Mobile.iml" />
-      <module fileurl="file://$PROJECT_DIR$/juds-0.95/juds-0.95.iml" filepath="$PROJECT_DIR$/juds-0.95/juds-0.95.iml" />
       <module fileurl="file://$PROJECT_DIR$/web3j/web3j.iml" filepath="$PROJECT_DIR$/web3j/web3j.iml" />
       <module fileurl="file://$PROJECT_DIR$/web3j-android/web3j-android.iml" filepath="$PROJECT_DIR$/web3j-android/web3j-android.iml" />
     </modules>

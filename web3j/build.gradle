@@ -4,12 +4,12 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.0.111-beta'
-    //compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.google.code.gson:gson:2.7'
     compile 'org.json:json:20160810'
     compile 'junit:junit:4.12'
+    compile files('libs/juds-0.95.jar')
+
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
-    compile project(':juds-0.95')
 }

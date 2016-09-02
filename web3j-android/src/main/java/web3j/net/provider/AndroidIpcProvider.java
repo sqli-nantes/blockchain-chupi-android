@@ -19,7 +19,7 @@ public class AndroidIpcProvider extends IpcAbstractProvider {
     }
 
     @Override
-    protected void createSocket() throws IOException {
+    protected void setStreams() throws IOException {
         this.socket = new LocalSocket();
         this.socket.connect(new LocalSocketAddress(ipcFilePath, LocalSocketAddress.Namespace.FILESYSTEM));
         this.outputStream = this.socket.getOutputStream();
@@ -27,11 +27,14 @@ public class AndroidIpcProvider extends IpcAbstractProvider {
     }
 
     @Override
-    protected void closeSocket() throws IOException {
+    public void stop() throws Web3JException {
         if( this.socket != null ) {
-            this.socket.close();
+            try {
+                this.socket.close();
+            } catch (IOException e) {
+                throw new Web3JException(e);
+            }
         }
+        super.stop();
     }
-
-
 }

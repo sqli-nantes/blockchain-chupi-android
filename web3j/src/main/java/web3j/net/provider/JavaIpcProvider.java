@@ -19,14 +19,9 @@ public class JavaIpcProvider extends IpcAbstractProvider {
     }
 
     @Override
-    protected void createSocket() throws IOException {
+    protected void setStreams() throws IOException {
         socket = new UnixDomainSocketClient(this.ipcFilePath, JUDS.SOCK_STREAM);
         this.outputStream = socket.getOutputStream();
         this.inputStream = socket.getInputStream();
-    }
-
-    @Override
-    protected void closeSocket() throws IOException {
-        if( socket != null ) socket.close();
     }
 }

@@ -10,7 +10,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/juds-0.95" />
             <option value="$PROJECT_DIR$/web3j" />
             <option value="$PROJECT_DIR$/web3j-android" />
           </set>
@@ -19,7 +18,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/juds-0.95" />
             <option value="$PROJECT_DIR$/web3j" />
             <option value="$PROJECT_DIR$/web3j-android" />
           </set>

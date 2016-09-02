@@ -9,21 +9,5 @@ import org.junit.Test;
 public class UtilsTest {
 
 
-    @Before
-    public void setup() throws Exception{
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("hello");
-            }
-        }).start();
-    }
-
-    @Test
-    public void test() throws Exception{
-
-
-        System.out.println("hi");
-    }
 
 }
