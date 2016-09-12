@@ -3,25 +3,27 @@ package web3j.solidity.types;
 
 import java.util.regex.Pattern;
 
-import web3j.solidity.formatters.SolidityFormatters;
-
 /**
  * Created by gunicolas on 16/08/16.
  */
-public class SolidityBytes extends SolidityType {
+public class SBytes extends SType<Byte[]> {
 
-    public SolidityBytes() {
-        super(  SolidityFormatters.getInputBytesFormatter(),
-                SolidityFormatters.getOuputBytesFormatter());
+    private SBytes(Byte[] value) {
+        super(value);
+        //InputBytesFormatter()
+        //OuputBytesFormatter()
     }
 
-    @Override
-    public boolean isType(String name) {
+
+    public static SBytes fromByteArray(Byte[] value){
+        return new SBytes(value);
+    }
+
+    public static boolean isType(String name) {
         return Pattern.compile("^bytes([0-9])+(\\[([0-9])*\\])*$").matcher(name).matches();
     }
 
-    @Override
-    public int staticPartLength(String name) {
+    public static int staticPartLength(String name) {
         if( isType(name) ) {
             int start = "bytes".length();
             int arrayIndex = name.indexOf("[");
@@ -34,4 +36,16 @@ public class SolidityBytes extends SolidityType {
         }
         return -1; //ERROR
     }
+
+    @Override
+    public boolean isDynamicType() {
+        return false;
+    }
+
+    @Override
+    public String asString() {
+        return value.toString(); //TODO ???
+    }
+
+
 }

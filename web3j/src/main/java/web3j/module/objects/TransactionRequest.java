@@ -34,6 +34,14 @@ public class TransactionRequest {
         this.dataHex = SolidityUtils.toHex(data);
     }
 
+    public void setDataHex(String dataHex) {
+        this.dataHex = dataHex;
+    }
+
+    public void setToHex(String toHex) {
+        this.toHex = toHex;
+    }
+
     @Override
     public String toString() {
         return "{" +

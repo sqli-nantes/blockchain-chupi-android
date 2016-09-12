@@ -2,42 +2,41 @@ package web3j.solidity.types;
 
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by gunicolas on 16/08/16.
  */
+@RunWith(JUnitParamsRunner.class)
 public class SolidityBytesTest {
 
-    String testsTrue[] = new String[]{
-            "bytes32",
-            "bytes64[]",
-            "bytes8[4]",
-            "bytes256[][]",
-            "bytes64[][6][]"
-    };
-
-    String testsFalse[] = new String[]{
-            "bytes",
-            "bytes[]",
-            "bytes[4]",
-            "bytes[][]",
-            "bytes[][6][]"
-    };
-
-    SolidityBytes a = new SolidityBytes();
+    private Object[] parametersForIsType() {
+        return new Object[]{
+                new Object[]{"bytes32",true},
+                new Object[]{"bytes64[]",true},
+                new Object[]{"bytes8[4]",true},
+                new Object[]{"bytes256[][]",true},
+                new Object[]{"bytes64[][6][]",true},
+                new Object[]{"bytes",false},
+                new Object[]{"bytes[]",false},
+                new Object[]{"bytes[4]",false},
+                new Object[]{"bytes[][]",false},
+                new Object[]{"bytes[][6][]",false}
+        };
+    }
 
     @Test
-    public void testIsType() throws Exception{
-        for(String test : testsTrue){
-            assertTrue(a.isType(test));
-        }
-
-        for(String test : testsFalse){
-            assertTrue(!a.isType(test));
-        }
+    @Parameters
+    public void isType(String type, boolean expected) throws Exception{
+        final boolean result = SBytes.isType(type);
+        assertEquals(expected,result);
     }
 
 }

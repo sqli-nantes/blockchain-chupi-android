@@ -2,36 +2,36 @@ package web3j.solidity.types;
 
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by gunicolas on 16/08/16.
  */
+@RunWith(JUnitParamsRunner.class)
 public class SolidityIntTest {
 
-    String testsTrue[] = new String[]{
-        "int",
-        "int[]",
-        "int[4]",
-        "int[][]",
-        "int[3][]",
-        "int[][6][]",
-        "int32",
-        "int64[]",
-        "int8[4]",
-        "int256[][]",
-        "int[3][]",
-        "int64[][6][]"
-    };
-
-    SolidityInt a = new SolidityInt();
-
-    @Test
-    public void testIsType() throws Exception{
-        for(String test : testsTrue){
-            assertTrue(a.isType(test));
-        }
+    private Object[] parametersForIsType() {
+        return new Object[]{
+                new Object[]{"int",true},
+                new Object[]{"int[]",true},
+                new Object[]{"int[4]",true},
+                new Object[]{"int[][]",true},
+                new Object[]{"int[3][]",true},
+                new Object[]{"int[][6][]",true},
+                new Object[]{"int32",true},
+                new Object[]{"int64[]",true},
+                new Object[]{"int8[4]",true},
+                new Object[]{"int256[][]",true},
+                new Object[]{"int[3][]",true},
+                new Object[]{"int64[][6][]",true}
+        };
     }
+
 }

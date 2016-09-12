@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -48,7 +49,7 @@ public abstract class SolidityUtils {
 
 
     public static String padLeft(String toPad,int nbChars,char sign){
-        return new String(new char[nbChars-toPad.length()+1]).replace('\0',sign) + toPad;
+        return new String(new char[nbChars-toPad.length()]).replace('\0',sign) + toPad;
     }
     public static String padLeftWithZeros(String toPad,int nbChars){
         return padLeft(toPad,nbChars,'0');
@@ -127,17 +128,15 @@ public abstract class SolidityUtils {
         return "0x"+sb.toString();
     }
 
-    public static String transformToFullName(JSONObject abi) throws JSONException {
-        String name = abi.getString("name");
-        if( name.indexOf('(') != -1 ) return name;
-        JSONArray inputs = abi.getJSONArray("inputs");
-        String typeName = "";
-        for(int i=0;i<inputs.length();i++){
-            JSONObject obj = inputs.getJSONObject(i);
-            typeName += obj.getString("type");
-            if( i < inputs.length()-1 ) typeName += ",";
+    public static String transformToFullName(Method method) throws JSONException {
+        StringBuilder sbStr = new StringBuilder();
+        int i=0;
+        for (Class c : method.getParameterTypes()) {
+            sbStr.append(c.getSimpleName().substring(1).toLowerCase());
+            if (i <  method.getParameterCount()-1 ) sbStr.append(",");
+            i++;
         }
-        return name + '(' + typeName + ')';
+        return method.getName() + '(' + sbStr.toString() + ')';
     }
     public static String extractDisplayName(String name){
         int index = name.indexOf('(');
@@ -148,6 +147,9 @@ public abstract class SolidityUtils {
         int index = name.indexOf('(');
         if( index != -1 ) return name.substring(index+1,name.length()-1-(index+1)).replace(" ","");
         else return "";
+    }
+    public static String extractSolidityTypeName(Object argument){
+        return argument.getClass().getSimpleName().substring(1).toLowerCase();
     }
 
     /* Format "-6564.1654" to BigDecimal object */
@@ -226,7 +228,7 @@ public abstract class SolidityUtils {
     }
 
     /*
-    * Get Hexadecimal string from bigDecimal String
+    * Get Hexadecimal string from bigDecimal String (no 0x identifier)
     * By M.PLOUHINEC
      */
     public static String bigDecimalToHexString(BigDecimal value){
@@ -257,9 +259,6 @@ public abstract class SolidityUtils {
             sTemp.replace("-", "");
         }
 
-        // Ajout de l'écriture en hexadecimal
-        l_result.append("0x");
-
         // Gestion de la partie entière
         int nbDecimales = scale/4;
 
@@ -281,7 +280,7 @@ public abstract class SolidityUtils {
             else return "0x0";
         } else if( isBigDecimal(obj) ){
             BigDecimal bd = (BigDecimal) obj;
-            return bigDecimalToHexString(bd); //TODO check function done
+            return "0x"+bigDecimalToHexString(bd);
         } else if( isJsonObject(obj) ){
             JSONObject json = (JSONObject) obj;
             return utf8ToHex(json.toString());
@@ -289,7 +288,7 @@ public abstract class SolidityUtils {
             String s = (String) obj;
             if( s.contains("0x") ) return s;
             else if( isStringNumber(s) ){
-                return bigDecimalToHexString(s); //TODO check function done
+                return "0x"+bigDecimalToHexString(s);
             } else{
                 return asciiToHex(s);
             }
@@ -329,8 +328,8 @@ public abstract class SolidityUtils {
     public static BigDecimal toTwosComplement(String value){
         BigDecimal valueBD = toBigDecimal(value);
         if( valueBD.signum() == -1 ){
-            BigDecimal complement = new BigDecimal("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-            return valueBD.add(complement).add(new BigDecimal(1));
+            BigInteger complement = new BigInteger("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",16);
+            return valueBD.add(new BigDecimal(complement)).add(new BigDecimal(1));
         }
         return valueBD;
     }

@@ -4,6 +4,7 @@ package web3j.solidity;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 
 import web3j.sha3.Sha3;
@@ -34,12 +35,12 @@ public class SolidityUtilsTest {
     public void testBigDecimalToHexString() throws Exception{
 
         String testsEquals[] = new String[]{
-            "0x47ac2.cf1224631",
-            "0x478a",
-            "-0x478a",
-            "-0x478a.457b74ca",
-            "0x8c90.53abc947064ece9a2c67",
-            "-0xfff54.f54fe5f"
+            "47ac2.cf1224631",
+            "478a",
+            "-478a",
+            "-478a.457b74ca",
+            "8c90.53abc947064ece9a2c67",
+            "-fff54.f54fe5f"
         };
 
         for(String test : testsEquals){

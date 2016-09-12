@@ -12,6 +12,4 @@ public class Web3JException extends RuntimeException {
     public Web3JException(String message) {
          super(message);
     }
-
-
 }

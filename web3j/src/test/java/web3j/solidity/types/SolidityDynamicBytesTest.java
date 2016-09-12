@@ -1,42 +1,42 @@
 package web3j.solidity.types;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by gunicolas on 16/08/16.
  */
+@RunWith(JUnitParamsRunner.class)
 public class SolidityDynamicBytesTest {
 
-    String testsTrue[] = new String[]{
-            "bytes",
-            "bytes[]",
-            "bytes[4]",
-            "bytes[][]",
-            "bytes[3][]",
-            "bytes[][6][]",
-            "bytes[3][]"
-    };
-
-    String testsFalse[] = new String[]{
-            "bytes32",
-            "bytes64[]",
-            "bytes8[4]",
-            "bytes256[][]",
-            "bytes64[][6][]"
-    };
-
-    SolidityDynamicBytes a = new SolidityDynamicBytes();
+    private Object[] parametersForIsType() {
+        return new Object[]{
+                new Object[]{"bytes",true},
+                new Object[]{"bytes[]",true},
+                new Object[]{"bytes[4]",true},
+                new Object[]{"bytes[][]",true},
+                new Object[]{"bytes[3][]",true},
+                new Object[]{"bytes[][6][]",true},
+                new Object[]{"bytes[3][]",true},
+                new Object[]{"bytes32",false},
+                new Object[]{"bytes64[]",false},
+                new Object[]{"bytes8[4]",false},
+                new Object[]{"bytes256[][]",false},
+                new Object[]{"bytes64[][6][]",false}
+        };
+    }
 
     @Test
-    public void testIsType() throws Exception{
-        for(String test : testsTrue){
-            assertTrue(a.isType(test));
-        }
-        for(String test : testsFalse){
-            assertTrue(!a.isType(test));
-        }
+    @Parameters
+    public void isType(String type,boolean expected) throws Exception{
+        final boolean result = SDynamicBytes.isType(type);
+        assertEquals(expected,result);
     }
 }
