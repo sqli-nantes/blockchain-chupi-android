@@ -19,6 +19,6 @@ Then just git clone dependencies repos into the blockchain-xXx-mobile projet.
 - and https://github.com/sqli-nantes/blockchain-web3J-android.git
 
 Then import this project (blockchain-xXx-mobile) into Android Studio IDE.
-Finally import blockchain-web3J-android dependency via > Project Structure > Dependencies > + > Module dependency
+Finally import blockchain-web3J-android dependency via  ```> Project Structure > Dependencies > + > Module dependency ```
 
 
