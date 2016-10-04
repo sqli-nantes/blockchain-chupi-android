@@ -56,7 +56,7 @@ public class DetectedCarActivity extends AppCompatActivity{
         car = new Car();
 
         CoordinatorLayout cLayout = (CoordinatorLayout)findViewById(R.id.main_content);
-        cLayout.getBackground().setAlpha(120);
+        //cLayout.getBackground().setAlpha(120);
         ArrayList<String> urls = getIntent().getStringArrayListExtra(Constants.URLSCAN);
         nbCars = urls.size();
         if (nbCars>0) {
