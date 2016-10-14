@@ -8,4 +8,15 @@
     <string name="search_hint">36 Boulevard du Tertre, Saint-Herblain 44800</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="cantine">Cantine</string>
+    <string name="paris">Paris</string>
+    <string name="sqli_n">Agence SQLI Nantes</string>
+    <string name="billund">Billund</string>
+    <string name="cantine_num">La cantine du numérique (Nantes)</string>
+    <string name="dernier_bar">Le dernier bar avant la fin du monde</string>
+    <string name="legoland">Legoland (Danemark)</string>
+    <string name="londres">Londres</string>
+    <string name="sqli">SQLI</string>
+    <string name="destination_text">Selectionnez votre destination:</string>
+    <string name="tardis">Tardis</string>
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="fab_sqli" type="id" />
+    <item name="fab_cantine" type="id" />
+    <item name="fab_lego" type="id" />
+    <item name="fab_tardis" type="id" />
+    <item name="fab_bar" type="id" />
+    <item name="btn_sqli" type="id" />
+</resources>

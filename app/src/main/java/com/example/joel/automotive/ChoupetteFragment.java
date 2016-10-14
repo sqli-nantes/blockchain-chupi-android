@@ -56,7 +56,7 @@ public class ChoupetteFragment extends Fragment {
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),MapsActivity.class);
+                Intent intent = new Intent(view.getContext(),SelectedDestinationActivity.class);
                 intent.putExtra(Constants.CAR,car);
                 startActivity(intent);
             }
