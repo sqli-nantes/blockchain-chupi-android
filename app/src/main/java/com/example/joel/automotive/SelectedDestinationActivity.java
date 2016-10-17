@@ -33,11 +33,6 @@ public class SelectedDestinationActivity extends AppCompatActivity {
     private Destination destination;
     private Address hereAddress;
 
-    /* private FloatingActionButton fab_sqli;
-     private FloatingActionButton fab_cantine;
-     private FloatingActionButton fab_bar;
-     private FloatingActionButton fab_lego;
-     private FloatingActionButton fab_tardis; */
     private AppCompatButton go_sqli;
     private AppCompatButton go_cantine;
     private AppCompatButton go_bar;
@@ -59,78 +54,6 @@ public class SelectedDestinationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_destination);
 
-     /*   fab_sqli = (FloatingActionButton)findViewById(R.id.btn_sqli);
-        fab_cantine = (FloatingActionButton)findViewById(R.id.btn_cantine);
-        fab_bar = (FloatingActionButton)findViewById(R.id.btn_bar);
-        fab_tardis = (FloatingActionButton)findViewById(R.id.btn_tardis);
-        fab_lego = (FloatingActionButton)findViewById(R.id.btn_lego);
-        car = (Car) getIntent().getExtras().getSerializable(Constants.CAR);
-
-
-        //dest = (Address) destinationAddress;
-        fab_sqli.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
-                intent.putExtra(Constants.CAR, car);
-                intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "Agence SQLI Nantes");
-                intent.putExtra(Constants.PRICE, 12000);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-            }
-        });
-
-        fab_cantine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
-                intent.putExtra(Constants.CAR, car);
-                intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "La cantine du numerique");
-                intent.putExtra(Constants.PRICE, 600);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-            }
-        });
-
-        fab_bar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
-                intent.putExtra(Constants.CAR, car);
-                intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "Le dernier bar avant la fin du monde (Paris I)");
-                intent.putExtra(Constants.PRICE, 382000);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-            }
-        });
-        fab_tardis.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
-                intent.putExtra(Constants.CAR, car);
-                intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "Le Tardis (London)");
-                intent.putExtra(Constants.PRICE, 778655);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-            }
-        });
-        fab_lego.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
-                intent.putExtra(Constants.CAR, car);
-                intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "LegoLand (Danemark)");
-                intent.putExtra(Constants.PRICE, 1553000);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-            }
-        });
-         */
 
         go_sqli = (AppCompatButton) findViewById(R.id.btn_sqli);
         go_cantine = (AppCompatButton) findViewById(R.id.btn_cantine);
@@ -227,6 +150,15 @@ public class SelectedDestinationActivity extends AppCompatActivity {
         AgenceSqli.setFeatureName("Agence SQLI Nantes");
 
     }*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        menu.removeItem(R.id.action_refresh);
+        return true;
+    }
+
 
 
     @Override

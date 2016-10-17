@@ -19,4 +19,19 @@
     <string name="sqli">SQLI</string>
     <string name="destination_text">Selectionnez votre destination:</string>
     <string name="tardis">Tardis</string>
+    <string name="str_goodbye">Merci ! \n Bonne continuation \n et à bientôt</string>
+    <string name="end_image">End image</string>
+    <string name="str_arrived_destination">ARRIVE A DESTINATION</string>
+    <string name="txt_journey_progess">Voyage en cours</string>
+    <string name="str_acceptation">Accepter</string>
+    <string name="str_to">A</string>
+    <string name="str_from">De</string>
+    <string name="str_price">Prix</string>
+    <string name="str_cancel">Annuler</string>
+    <string name="img_selected_car">img selected_car</string>
+    <string name="str_img_selected_car">img @string/img_selected_car</string>
+    <string name="str_no">Non</string>
+    <string name="str_yes">Oui</string>
+    <string name="str_want_rent">Souhaitez vous louer</string>
+    <string name="str_welcome">Communiquez avec les voiture indépendante</string>
 </resources>

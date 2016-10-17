@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/car_img"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/str_img_selected_car" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -21,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="De"
+            android:text="@string/str_from"
             android:id="@+id/textView2" />
 
         <TextView
@@ -37,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="A"
+            android:text="@string/str_to"
             android:id="@+id/textView4" />
 
         <TextView
@@ -53,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Prix"
+            android:text="@string/str_price"
             android:id="@+id/textView5" />
 
         <TextView
@@ -74,7 +75,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Accepter"
+                android:text="@string/str_acceptation"
                 android:textColor="#4CAF50"
                 android:id="@+id/btn_accept"
                 android:layout_gravity="center"
@@ -83,7 +84,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Annuler"
+                android:text="@string/str_cancel"
                 android:textColor="#F44336"
                 android:id="@+id/btn_cancel"
                 android:layout_gravity="center"

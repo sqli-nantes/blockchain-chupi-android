@@ -27,23 +27,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FloatingActionButton fab_bt = (FloatingActionButton)findViewById(R.id.fab_search_around);
         FloatingActionButton fab_qr = (FloatingActionButton)findViewById(R.id.fab_qr_code);
 
-        fab_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,LoadingActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
-            }
-        });
-
-        fab_qr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,QrScanActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
-            }
-        });
+//        fab_bt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this,ScanningChoiceActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(0,0);
+//            }
+//        });
+//
+//        fab_qr.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this,QrScanActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(0,0);
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

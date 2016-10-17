@@ -1,37 +1,22 @@
 package com.example.joel.automotive;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.content.Intent;
 
-/**
- * Created by joel on 01/08/16.
- */
-public class TravelActivity extends AppCompatActivity{
 
-    private AppCompatButton destinationReach;
+
+public class EndActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inprogress);
-
-        destinationReach = (AppCompatButton) findViewById(R.id.btn_destination);
-
-        destinationReach.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TravelActivity.this, EndActivity.class);
-                startActivity(intent);
-            }
-        });
+        setContentView(R.layout.activity_end);
     }
 
-    @Override
+        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -40,7 +25,7 @@ public class TravelActivity extends AppCompatActivity{
         return true;
     }
 
-    @Override
+     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Souhaitez vous louer"
+        android:text="@string/str_want_rent"
         android:id="@+id/textView"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
@@ -53,7 +53,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Oui"
+            android:text="@string/str_yes"
             android:id="@+id/accept_car"
             android:layout_gravity="bottom"
             android:layout_weight="1"
@@ -64,7 +64,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Non"
+            android:text="@string/str_no"
             android:id="@+id/reject_car"
             android:layout_gravity="bottom"
             android:layout_weight="1"
