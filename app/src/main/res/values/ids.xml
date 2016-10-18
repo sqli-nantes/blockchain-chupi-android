@@ -6,4 +6,6 @@
     <item name="fab_tardis" type="id" />
     <item name="fab_bar" type="id" />
     <item name="btn_sqli" type="id" />
+    <item name="text_message" type="id">Je suis sur le main</item>
+    <item name="text_message_2" type="id">Je suis sur le ScanningChoice</item>
 </resources>

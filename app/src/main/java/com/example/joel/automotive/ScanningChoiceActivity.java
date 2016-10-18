@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class ScanningChoiceActivity extends AppCompatActivity {
 
@@ -20,8 +21,9 @@ public class ScanningChoiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanning_choice);
 
+        TextView mTextView = (TextView) findViewById(R.id.text_message_2);
 
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab_bt = (FloatingActionButton)findViewById(R.id.fab_search_around);
