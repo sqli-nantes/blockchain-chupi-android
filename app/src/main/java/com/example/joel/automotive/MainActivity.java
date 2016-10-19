@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 /**
  * Created by joel on 04/08/16.
@@ -24,26 +25,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab_bt = (FloatingActionButton)findViewById(R.id.fab_search_around);
-        FloatingActionButton fab_qr = (FloatingActionButton)findViewById(R.id.fab_qr_code);
+//        FloatingActionButton fab_bt = (FloatingActionButton)findViewById(R.id.fab_search_around);
+//        FloatingActionButton fab_qr = (FloatingActionButton)findViewById(R.id.fab_qr_code);
+//
+//        fab_bt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this,LoadingActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(0,0);
+//            }
+//        });
+//
+//        fab_qr.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this,QrScanActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(0,0);
+//            }
+//        });
 
-        fab_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,LoadingActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
-            }
-        });
+//        Ici essai de passer par une ancienne version d'Android! Necessité de revoir ce code!
 
-        fab_qr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,QrScanActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
-            }
-        });
+//        Button btn = new Button(this);
+//        btn.setOnClickListener(this);
+//        setContentView(btn);
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -53,6 +62,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void onCLick(View view){
+        Intent intent = new Intent(MainActivity.this,ScanningChoiceActivity.class);
+        startActivity(intent);
     }
 
     @Override
