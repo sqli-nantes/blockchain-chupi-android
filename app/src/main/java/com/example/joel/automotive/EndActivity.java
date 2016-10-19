@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 
-
+// Fin du scenario. Le trajet a été validé par les 2 parties
 
 public class EndActivity extends AppCompatActivity {
 

@@ -26,8 +26,9 @@ import static com.example.joel.automotive.R.string.sqli_n;
  */
 
 public class SelectedDestinationActivity extends AppCompatActivity {
-// Pour passer outre la map et proposer 5 trajets précalculés
-// Doit se placer entre DetectedCarActivity et Summary Activity
+// Pour passer outre la map et proposer 5 trajets précalculés en demo
+// Se placer entre DetectedCarActivity et Summary Activity
+// Nécessite les informations de la voiture
 
     private Car car;
     private Destination destination;
