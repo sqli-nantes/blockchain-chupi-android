@@ -19,4 +19,7 @@
     <string name="sqli">SQLI</string>
     <string name="destination_text">Selectionnez votre destination:</string>
     <string name="tardis">Tardis</string>
+    <string name="text_GoodBye">Bonne continuation \n et à bientôt!</string>
+    <string name="txt_end_image">End image</string>
+    <string name="txt_arrived">ARRIVE A DESTINATION</string>
 </resources>

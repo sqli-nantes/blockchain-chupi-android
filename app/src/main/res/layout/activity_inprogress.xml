@@ -38,7 +38,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="ARRIVE A DESTINATION"
+            android:text="@string/txt_arrived"
             android:id="@+id/btn_destination"
             style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:nestedScrollingEnabled="false"
