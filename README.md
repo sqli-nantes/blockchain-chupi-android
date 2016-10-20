@@ -5,11 +5,12 @@ Application mobile de décentralisation de la location de véhicule par la block
 jim veut louer une voiture pour aller de A vers B.
 1. Scanner pour trouver une voiture au choix de l'utilisateur:
 1.1. via QR code : *apparition d'une fenetre de scan pour QR code*
-1.2. via blue touch :
+1.2. via blue touch : 
 2. Choix de la voiture
-3. Choix de la destination : *apparition d'une carte pour selectionner l'endroit*
-4. Payement de la course : 
+3. Choix de la destination : *apparition d'une carte pour selectionner l'endroit* (désactivé, actuellement : choix préenregistré)
+4. Payement de la course 
 5. Validation de la destination
+6. Fin du scenario
 
 
 ```
