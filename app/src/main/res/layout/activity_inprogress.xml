@@ -10,9 +10,9 @@
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Voyage en cours"
-        android:id="@+id/textView"
+            style="@style/Title"
+        android:text="@string/txt_JourneyInProgress"
+        android:id="@+id/ttl_journey"
         android:layout_gravity="center_horizontal"
             android:layout_centerInParent="true" />
 
@@ -38,9 +38,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/txt_arrived"
+            android:text="@string/txt_tmp"
             android:id="@+id/btn_destination"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            style="@style/Second_Button"
             android:nestedScrollingEnabled="false"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>

@@ -18,6 +18,11 @@ import android.widget.Button;
 /**
  * Created by joel on 04/08/16.
  */
+
+//  Lancement de l'appli et gestion de la première activité : choix entre QR code et BlueTouch
+//
+//
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,14 +64,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
-        drawer.setOnClickListener(this);
+        drawer.setOnClickListener(this); // ecran actif sans bouton
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public void onClick(View view){
+    public void onClick(View view){     // ecran actif sans bouton
         Log.d("test ecran","c'est moi");
         Intent intent = new Intent(MainActivity.this,ScanningChoiceActivity.class);
         startActivity(intent);

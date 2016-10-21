@@ -21,5 +21,14 @@
     <string name="tardis">Tardis</string>
     <string name="text_GoodBye">Bonne continuation \n et à bientôt!</string>
     <string name="txt_end_image">End image</string>
-    <string name="txt_arrived">ARRIVE A DESTINATION</string>
+    <string name="txt_arrived">Je confirme</string>
+    <string name="txt_JourneyInProgress">Voyage en cours</string>
+    <string name="txt_ttl_arrived">Choupette dit que vous êtes arrivé</string>
+    <string name="img_arrived">img_arrived</string>
+    <string name="txt_tmp">Temporaire - à changer</string>
+    <string name="btn_refuse">Refuser</string>
+    <string name="txt_ttl_contract">Tarif de la course</string>
+    <string name="Txt_to">A</string>
+    <string name="txt_price">Prix</string>
+    <string name="txt_from">De</string>
 </resources>

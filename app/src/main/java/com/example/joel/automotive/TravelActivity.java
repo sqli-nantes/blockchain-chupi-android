@@ -23,7 +23,7 @@ public class TravelActivity extends AppCompatActivity{
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TravelActivity.this, EndActivity.class);
+                Intent intent = new Intent(TravelActivity.this, TravelActivity.class);
                 startActivity(intent);
             }
         });
