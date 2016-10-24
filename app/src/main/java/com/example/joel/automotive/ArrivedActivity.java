@@ -1,33 +1,29 @@
 package com.example.joel.automotive;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-/**
- * Created by joel on 01/08/16.
- */
-public class TravelActivity extends AppCompatActivity{
+public class ArrivedActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inprogress);
-
+        setContentView(R.layout.activity_arrived);
         AppCompatButton btn = (AppCompatButton) findViewById(R.id.btn_destination) ;
 
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TravelActivity.this, TravelActivity.class);
+                Intent intent = new Intent(ArrivedActivity.this, EndActivity.class);
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -61,4 +57,5 @@ public class TravelActivity extends AppCompatActivity{
         startActivity(intent);
         overridePendingTransition(0,0);
     }
+
 }

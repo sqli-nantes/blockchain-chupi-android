@@ -9,8 +9,45 @@ jim veut louer une voiture pour aller de A vers B.
 2. Choix de la voiture
 3. Choix de la destination : *apparition d'une carte pour selectionner l'endroit* (désactivé, actuellement : choix préenregistré)
 4. Payement de la course 
-5. Validation de la destination
-6. Fin du scenario
+5. Voyage en cours
+6. Validation de la destination
+7. Fin du scenario
 
 
 ```
+# Architecture fichiers java:
+
+							--------------
+							|MainActivity|
+							--------------
+			|----------------------|----------------------|
+	-----------------								----------------
+	|LoadingActivity|								|QRScanActivity|
+	-----------------								----------------
+			|---------------------------------------------|
+									|
+						---------------------
+						|DetectedCarActivity|
+						---------------------
+									|
+					-----------------------------
+					|SelectedDestinationActivity|
+					-----------------------------
+								|
+						-----------------
+						|SummaryActivity|
+						-----------------
+								|
+						----------------
+						|TravelActivity|
+						----------------
+								|
+						-----------------
+						|ArrivedActivity|
+						-----------------
+								|
+							-------------
+							|EndActivity|
+							-------------
+
+
