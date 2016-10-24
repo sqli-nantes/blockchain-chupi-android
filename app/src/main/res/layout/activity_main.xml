@@ -23,11 +23,11 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ecran_accueil"
-        android:id="@+id/imageView3" />
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:srcCompat="@drawable/ecran_accueil"-->
+        <!--android:id="@+id/imageView3" />-->
 
 </android.support.v4.widget.DrawerLayout>
 

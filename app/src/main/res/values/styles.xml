@@ -16,5 +16,33 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="FloatingActionButton">android.support.design.widget.FloatingActionButton</style>
+
+    <style name="Title" parent="AppTheme">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="First_Button" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorTextMagnify</item>
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
+    <style name="Second_Button" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="Circle_Button" parent="FloatingActionButton">
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="Question" parent="AppTheme">
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:tint">@color/colorAccent</item>
+    </style>
 
 </resources>

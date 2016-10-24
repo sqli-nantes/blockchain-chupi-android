@@ -13,7 +13,7 @@ import android.util.Log;
 public class SplashScreen extends Activity {
 
     /** Délais attente **/
-    private final int SPLASH_DISPLAY_LENGTH = 100;
+    private final int SPLASH_DISPLAY_LENGTH = 500;
 
     /** Appel à la premiere création d'activité. */
     @Override
@@ -24,7 +24,6 @@ public class SplashScreen extends Activity {
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
         boolean b = new Handler().postDelayed(new Runnable() {
-
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
@@ -33,7 +32,6 @@ public class SplashScreen extends Activity {
                 SplashScreen.this.finish();
                 Log.d("test ecran","c'est moi");
             }
-
 
         }, SPLASH_DISPLAY_LENGTH);
     }

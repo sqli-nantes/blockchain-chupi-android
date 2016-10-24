@@ -11,7 +11,7 @@ import android.view.View;
 
 //  Propose le choix de detection des véhicules
 // Choix : QR Code ou BlueTouch
-// entre MainActivity et LoadingActivity ou QRScanActivity
+// entre SplashScreen et LoadingActivity ou QRScanActivity
 
 public class ScanningChoiceActivity extends AppCompatActivity {
 
@@ -21,17 +21,19 @@ public class ScanningChoiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scanning_choice);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab_bt = (FloatingActionButton)findViewById(R.id.fab_search_around);
+//      Pour le DevFest, la possibilité blueTouch a été éliminée
+//      FloatingActionButton fab_bt = (FloatingActionButton)findViewById(R.id.fab_search_around);
         FloatingActionButton fab_qr = (FloatingActionButton)findViewById(R.id.fab_qr_code);
-
-        fab_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ScanningChoiceActivity.this,LoadingActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0,0);
-            }
-        });
+//
+//      Relatif au blueTOUCH
+//        fab_bt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(ScanningChoiceActivity.this,LoadingActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(0,0);
+//            }
+//        });
 
         fab_qr.setOnClickListener(new View.OnClickListener() {
             @Override

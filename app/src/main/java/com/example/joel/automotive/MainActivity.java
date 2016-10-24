@@ -13,10 +13,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 /**
  * Created by joel on 04/08/16.
+ * Ceci est la copie du mainActivity initial
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     @Override
@@ -26,9 +26,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//  Pour le DevFest, la possibilité blueTouch a été éliminée
 //        FloatingActionButton fab_bt = (FloatingActionButton)findViewById(R.id.fab_search_around);
-//        FloatingActionButton fab_qr = (FloatingActionButton)findViewById(R.id.fab_qr_code);
-//
+        FloatingActionButton fab_qr = (FloatingActionButton)findViewById(R.id.fab_qr_code);
+
+//  Relatif au blueTOUCH
 //        fab_bt.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -37,23 +39,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                overridePendingTransition(0,0);
 //            }
 //        });
-//
-//        fab_qr.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this,QrScanActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(0,0);
-//            }
-//        });
 
-//        Ici essai de passer par une ancienne version d'Android! Necessité de revoir ce code!
-
-//        Button btn = new Button(this);
-//        btn.setOnClickListener(this);
-//        setContentView(btn);
-
-
+        fab_qr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,QrScanActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0,0);
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

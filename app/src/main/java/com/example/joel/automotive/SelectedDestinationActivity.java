@@ -1,24 +1,13 @@
 package com.example.joel.automotive;
 
-import android.annotation.SuppressLint;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.location.Address;
-import android.support.design.widget.FloatingActionButton;
-import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import static com.example.joel.automotive.R.string.sqli_n;
 
 /**
  * Created by alb on 13/10/16.
