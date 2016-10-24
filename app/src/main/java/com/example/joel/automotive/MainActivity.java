@@ -9,14 +9,26 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.sqli.blockchain.android_geth.EthereumActivity;
+import com.sqli.blockchain.android_geth.EthereumService;
+
+import ethereumjava.EthereumJava;
+import ethereumjava.module.objects.NodeInfo;
+import ethereumjava.net.provider.AndroidIpcProvider;
 
 /**
  * Created by joel on 04/08/16.
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends EthereumActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    EthereumJava ethereumJava;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,5 +126,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+
+
+
+    @Override
+    public void onEthereumServiceReady() {
+        super.onEthereumServiceReady();
+
+        String ipcPath = EthereumService.dataDir +"/"+ EthereumService.GETH_IPC_FILE;
+        ethereumJava = new EthereumJava.Builder()
+                .provider(new AndroidIpcProvider(ipcPath))
+                .build();
+
     }
 }

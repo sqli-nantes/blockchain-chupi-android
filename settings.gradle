@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':ethereum-android-release', ':android-geth-release', ':geth'
