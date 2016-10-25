@@ -54,10 +54,7 @@ dependencies {
     compile 'org.altbeacon:android-beacon-library:2.9'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.google.maps:google-maps-services:0.1.15'
-
-
     compile 'io.reactivex:rxjava:1.1.6'
-
     compile project(':android-geth-release')
     compile project(':ethereum-android-release')
     compile project(':geth')

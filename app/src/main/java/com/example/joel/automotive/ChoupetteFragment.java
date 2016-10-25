@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.math.BigInteger;
+
 /**
  * Created by joel on 03/08/16.
  */
@@ -56,6 +58,14 @@ public class ChoupetteFragment extends Fragment {
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO RENTME
+                MyApplication application = (MyApplication) getActivity().getApplication();
+                application.setContractAtAdress(car.getContractAddress());
+                boolean unlocked = application.ethereumjava.personal.unlockAccount(application.accountId,MyApplication.PASSWORD,3600);
+                if( unlocked ) {
+                    application.choupetteContract.RentMe().sendTransaction(application.accountId, new BigInteger("90000"));
+                }
+
                 Intent intent = new Intent(view.getContext(),SelectedDestinationActivity.class);
                 intent.putExtra(Constants.CAR,car);
                 startActivity(intent);

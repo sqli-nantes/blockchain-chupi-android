@@ -95,10 +95,11 @@ public class DetectedCarActivity extends AppCompatActivity{
     private void getCarInfos(String url) {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        JsonObjectRequest getInfosJSON = new JsonObjectRequest(Request.Method.GET, url+"/toto.json",null,new Response.Listener<JSONObject>() {
+        JsonObjectRequest getInfosJSON = new JsonObjectRequest(Request.Method.GET, url+"/",null,new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    car.setContractAddress(response.getJSONObject("contract").getString("address"));
                     car.setName(response.getString("name"));
                     car.setManufacturer(response.getString("manufacturer"));
                     car.setModel(response.getString("model"));
@@ -116,7 +117,7 @@ public class DetectedCarActivity extends AppCompatActivity{
 
         queue.add(getInfosJSON);
 
-        ImageRequest getImage = new ImageRequest(url+"/img.jpg", new Response.Listener<Bitmap>() {
+        ImageRequest getImage = new ImageRequest(url+"/img", new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
                 car.setImage(response);
