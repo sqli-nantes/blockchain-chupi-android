@@ -1,6 +1,7 @@
 package com.example.joel.automotive;
 
 import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -8,14 +9,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+
+/**
+ * Created by alb on 25/10/16.
+ * Appear after Choupette signaled she is arrived. Wait for user's confirm
+ */
+
 public class ArrivedActivity extends AppCompatActivity {
 
+//  Pour envoyer les infos de voyage dans la page. Caduque pour le DevFest (actuellement, ne fonctionne pas)
+
+//    private TextView from;
+//    private TextView destination;
+//    private TextView price;
+//    private Bundle bundle;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arrived);
-        AppCompatButton btn = (AppCompatButton) findViewById(R.id.btn_destination) ;
-
+//        bundle = getIntent().getExtras();
+        AppCompatButton btn = (AppCompatButton) findViewById(R.id.btn_destination);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,5 +72,34 @@ public class ArrivedActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(0,0);
     }
+
+//  Pour envoyer les infos de voyage dans la page. Caduque pour le DevFest (actuellement, ne fonctionne pas)
+
+//    protected void onStart() {
+//        super.onStart();
+//        setContentView(R.layout.activity_summary);
+
+//        from = (TextView) findViewById(R.id.txt_solid_from);
+//        destination = (TextView) findViewById(R.id.txt_solid_to);
+//        price = (TextView) findViewById(R.id.txt_solid_price);
+//        btn = (AppCompatButton) findViewById(R.id.btn_destination);
+
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(ArrivedActivity.this, EndActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        bundle = getIntent().getExtras();
+//
+//        if (bundle != null) {
+//            from.setText(bundle.getString(Constants.FROM).replaceAll("\\+", " "));
+//            destination.setText(bundle.getString(Constants.DESTINATION).replaceAll("\\+", " "));
+//            NumberFormat nf = NumberFormat.getCurrencyInstance();
+//            price.setText(nf.format(bundle.getDouble(Constants.PRICE)));
+//        }
+//    }
 
 }

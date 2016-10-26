@@ -9,7 +9,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#fff"
     tools:context="com.example.joel.automotive.EndActivity">
+
+    <TextView
+        android:text="@string/ttl_end_api"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        style="@style/Title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:id="@+id/textView" />
 
     <TextView
         android:text="@string/text_GoodBye"
@@ -29,7 +40,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/cc"
+        app:srcCompat="@drawable/logo_sqli_devfest"
         android:id="@+id/imageView"
         android:layout_marginLeft="1dp"
         android:paddingBottom="100dp"
@@ -38,4 +49,18 @@
         android:contentDescription="@string/txt_end_image"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+
+
+
+    <Button
+        android:text="@string/btn_returnHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_returnHome"
+        style="@style/First_Button"
+        android:padding="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
 </RelativeLayout>

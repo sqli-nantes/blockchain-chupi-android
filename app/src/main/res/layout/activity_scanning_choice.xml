@@ -16,10 +16,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Recherche autour de moi"
         android:id="@+id/txt_search_around"
-        android:layout_below="@+id/btn_start"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="79dp"
         android:layout_gravity="center_horizontal|top" />
+    <!--android:layout_below="@+id/btn_start"-->
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

@@ -28,7 +28,6 @@ public class SummaryActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-
         setContentView(R.layout.activity_summary);
 
     }
@@ -76,7 +75,7 @@ public class SummaryActivity extends AppCompatActivity {
         from = (TextView) findViewById(R.id.txt_from);
         destination = (TextView) findViewById(R.id.txt_destination);
         price = (TextView) findViewById(R.id.txt_price);
-        car_img = (ImageView) findViewById(R.id.car_img);
+//        car_img = (ImageView) findViewById(R.id.car_img);
         btn_accept = (Button) findViewById(R.id.btn_accept);
         btn_cancel = (Button) findViewById(R.id.btn_cancel);
 
@@ -84,6 +83,7 @@ public class SummaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SummaryActivity.this,TravelActivity.class);
+//                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -103,7 +103,7 @@ public class SummaryActivity extends AppCompatActivity {
             destination.setText(bundle.getString(Constants.DESTINATION).replaceAll("\\+"," "));
             NumberFormat nf = NumberFormat.getCurrencyInstance();
             price.setText(nf.format(bundle.getDouble(Constants.PRICE)));
-            car_img.setImageBitmap(((Car) bundle.getSerializable(Constants.CAR)).getImage());
+//            car_img.setImageBitmap(((Car) bundle.getSerializable(Constants.CAR)).getImage());
         }
     }
 }

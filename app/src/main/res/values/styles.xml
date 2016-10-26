@@ -6,7 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorTextMagnify">@color/colorIcons</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -21,7 +20,10 @@
 
     <style name="Title" parent="AppTheme">
         <item name="android:textSize">30sp</item>
+        <item name="android:padding">5dp</item>
+        <!--<item name="android:letterSpacing">30sp</item>-->
         <item name="android:textStyle">bold</item>
+        <!--<item name=" android:layout_marginTop">37dp</item>-->
         <item name="android:gravity">center</item>
     </style>
 

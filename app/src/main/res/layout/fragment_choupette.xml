@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:text="@string/ttl_selected_car"
-        android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/ttl_choupette"
         android:visibility="visible"
-        tools:theme="@style/Title"
+        style="@style/Title"
         tools:gravity="center"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor"
+        android:lineSpacingExtra="20sp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_more"
@@ -33,16 +33,15 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:tint="#ffffff">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:tint="#ffffff"
-            tools:ignore="UselessParent">
+            tools:ignore="UselessParent"
+            android:id="@+id/lay_choupette">
 
             <LinearLayout
             android:orientation="horizontal"
@@ -61,9 +60,10 @@
             <LinearLayout
                 android:id="@+id/viewA"
                 android:layout_width="match_parent"
-                android:layout_height="201dp"
+                android:layout_height="150dp"
                 android:orientation="vertical"
                 android:layout_gravity="top">
+
                 <ImageView android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/car_img"
@@ -274,11 +274,12 @@
                             </LinearLayout>
                         </LinearLayout>
 
+                        <!--Le trait de séparation menu déroulant-->
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@android:color/darker_gray"
                             android:layout_marginTop="20dp"
+                            android:background="@android:color/darker_gray"
                             android:layout_marginBottom="15dp"/>
 
                     </LinearLayout>

@@ -75,7 +75,7 @@ public class SelectedDestinationActivity extends AppCompatActivity {
 //                destination.setDestinationName("La cantine du numerique");
                 intent.putExtra(Constants.CAR, car);
                 intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "La cantine du numerique");
+                intent.putExtra(Constants.DESTINATION, "La cantine du numerique (Nantes)");
                 intent.putExtra(Constants.PRICE, 0.6);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -88,7 +88,7 @@ public class SelectedDestinationActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
                 intent.putExtra(Constants.CAR, car);
                 intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "Le dernier bar avant la fin du monde (Paris I)");
+                intent.putExtra(Constants.DESTINATION, "Le dernier bar avant la fin du monde \n (Paris I)");
                 intent.putExtra(Constants.PRICE, 382.0);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -100,7 +100,7 @@ public class SelectedDestinationActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
                 intent.putExtra(Constants.CAR, car);
                 intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "Le Tardis (London)");
+                intent.putExtra(Constants.DESTINATION, "Le Tardis (London, England)");
                 intent.putExtra(Constants.PRICE, 778.65);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -112,7 +112,7 @@ public class SelectedDestinationActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
                 intent.putExtra(Constants.CAR, car);
                 intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "LegoLand (Danemark)");
+                intent.putExtra(Constants.DESTINATION, "LegoLand (Billung, Danemark)");
                 intent.putExtra(Constants.PRICE, 1553.0);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
