@@ -22,7 +22,7 @@
         android:layout_height="210dp"
         android:layout_gravity="center_horizontal"
         android:padding="20dp"
-        android:layout_weight=".25"
+        android:layout_weight=".35"
         tools:ignore="InefficientWeight,UselessParent">
 
         <TextView
@@ -85,7 +85,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25" />
+        android:layout_weight="0.2" />
 
     <Button
             android:layout_width="220dp"

@@ -88,7 +88,7 @@ public class SelectedDestinationActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
                 intent.putExtra(Constants.CAR, car);
                 intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "Le dernier bar avant la fin du monde \n (Paris I)");
+                intent.putExtra(Constants.DESTINATION, "Le dernier bar avant la fin du monde (Paris I)");
                 intent.putExtra(Constants.PRICE, 382.0);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
