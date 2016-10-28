@@ -24,23 +24,16 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:layout_gravity="center_horizontal">
-        <!--<ImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:id="@+id/imageView2"-->
-            <!--android:src="@drawable/routesansfin"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:adjustViewBounds="true"-->
-            <!--/>-->
+
+        <!--Utilisation d'une library specifique pour l'affichage des gif anime
+        utilise pl.droidsonroids.gif-->
         <pl.droidsonroids.gif.GifImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/gifanimated"
             android:src="@drawable/routesansfin"
             />
-        <!--android:background="@drawable/bg_anim"-->
-
-
+        
     </RelativeLayout>
     <RelativeLayout
     android:layout_width="match_parent"
