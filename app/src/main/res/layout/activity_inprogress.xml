@@ -24,14 +24,16 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:layout_gravity="center_horizontal">
-        <ImageView
+
+        <!--Utilisation d'une library specifique pour l'affichage des gif anime
+        utilise pl.droidsonroids.gif-->
+        <pl.droidsonroids.gif.GifImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imageView2"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_car"
-            android:adjustViewBounds="true"
+            android:id="@+id/gifanimated"
+            android:src="@drawable/routesansfin"
             />
+        
     </RelativeLayout>
     <RelativeLayout
     android:layout_width="match_parent"

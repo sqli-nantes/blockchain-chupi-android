@@ -47,6 +47,7 @@ dependencies {
     compile 'com.wang.avi:library:1.0.5'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'me.dm7.barcodescanner:zbar:1.9'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.2'
     compile 'com.android.support:support-v4:24.1.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.github.ybq:Android-SpinKit:1.0.4'

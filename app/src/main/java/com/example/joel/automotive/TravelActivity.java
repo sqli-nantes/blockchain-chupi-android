@@ -8,8 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+
 /**
  * Created by joel on 01/08/16.
+ * Temporary activity waiting for choupette signal to go to ArrivedActivity
  */
 
 public class TravelActivity extends AppCompatActivity{
@@ -61,5 +63,4 @@ public class TravelActivity extends AppCompatActivity{
         startActivity(intent);
         overridePendingTransition(0,0);
     }
-
 }
