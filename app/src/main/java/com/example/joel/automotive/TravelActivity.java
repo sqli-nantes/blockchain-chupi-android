@@ -11,23 +11,23 @@ import android.view.View;
 /**
  * Created by joel on 01/08/16.
  */
+
 public class TravelActivity extends AppCompatActivity{
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inprogress);
 
         AppCompatButton btn = (AppCompatButton) findViewById(R.id.btn_destination) ;
 
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TravelActivity.this, EndActivity.class);
+                Intent intent = new Intent(TravelActivity.this, ArrivedActivity.class);
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -61,4 +61,5 @@ public class TravelActivity extends AppCompatActivity{
         startActivity(intent);
         overridePendingTransition(0,0);
     }
+
 }

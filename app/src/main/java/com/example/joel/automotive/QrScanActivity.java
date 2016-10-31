@@ -15,6 +15,7 @@ import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 /**
  * Created by joel on 08/08/16.
+ * Scan QR code
  */
 public class QrScanActivity extends AppCompatActivity implements ZBarScannerView.ResultHandler {
     private ZBarScannerView mScannerView;

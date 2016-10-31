@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.math.BigInteger;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import ethereumjava.module.objects.Hash;
@@ -26,18 +25,15 @@ public class SummaryActivity extends AppCompatActivity {
     private TextView from;
     private TextView destination;
     private TextView price;
-    private ImageView car_img;
     private Button btn_accept;
     private Button btn_cancel;
     private Bundle bundle;
-
 
     BigInteger priceValue;
 
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-
         setContentView(R.layout.activity_summary);
 
     }
@@ -88,7 +84,6 @@ public class SummaryActivity extends AppCompatActivity {
         from = (TextView) findViewById(R.id.txt_from);
         destination = (TextView) findViewById(R.id.txt_destination);
         price = (TextView) findViewById(R.id.txt_price);
-        car_img = (ImageView) findViewById(R.id.car_img);
         btn_accept = (Button) findViewById(R.id.btn_accept);
         btn_cancel = (Button) findViewById(R.id.btn_cancel);
 
@@ -104,6 +99,7 @@ public class SummaryActivity extends AppCompatActivity {
                 }
 
                 Intent intent = new Intent(SummaryActivity.this,TravelActivity.class);
+//                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -124,7 +120,6 @@ public class SummaryActivity extends AppCompatActivity {
 
             GetPrice();
 
-            car_img.setImageBitmap(((Car) bundle.getSerializable(Constants.CAR)).getImage());
         }
     }
 
