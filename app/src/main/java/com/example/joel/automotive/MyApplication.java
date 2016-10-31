@@ -1,7 +1,5 @@
 package com.example.joel.automotive;
 
-import android.app.Application;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import com.example.joel.automotive.contract.ChoupetteContract;

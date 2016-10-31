@@ -58,6 +58,7 @@ dependencies {
     compile project(':android-geth-release')
     compile project(':ethereum-android-release')
     compile project(':geth')
+    compile 'io.reactivex:rxandroid:1.2.1'
 }
 
 

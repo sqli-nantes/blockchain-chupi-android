@@ -11,8 +11,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+
+import ethereumjava.solidity.types.SUInt;
 
 /**
  * Created by joel on 11/08/16.
@@ -25,6 +28,9 @@ public class SummaryActivity extends AppCompatActivity {
     private Button btn_accept;
     private Button btn_cancel;
     private Bundle bundle;
+
+
+    int priceValue;
 
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
@@ -72,6 +78,9 @@ public class SummaryActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        GetPrice();
+
         setContentView(R.layout.activity_summary);
 
         from = (TextView) findViewById(R.id.txt_from);
@@ -102,9 +111,41 @@ public class SummaryActivity extends AppCompatActivity {
         if (bundle!=null){
             from.setText(bundle.getString(Constants.FROM).replaceAll("\\+"," "));
             destination.setText(bundle.getString(Constants.DESTINATION).replaceAll("\\+"," "));
-            NumberFormat nf = NumberFormat.getCurrencyInstance();
-            price.setText(nf.format(bundle.getDouble(Constants.PRICE)));
+
+            //TODO call GetPrice
+
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             car_img.setImageBitmap(((Car) bundle.getSerializable(Constants.CAR)).getImage());
         }
+    }
+
+
+    private void GetPrice(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final MyApplication application = (MyApplication) getApplication();
+                boolean unlocked = application.ethereumjava.personal.unlockAccount(application.accountId, MyApplication.PASSWORD, 3600);
+                if (unlocked) {
+                    SUInt.SUInt256 result = (SUInt.SUInt256)application.choupetteContract.GetPrice().call();
+                    BigInteger resultBigInteger = (BigInteger) result.get();
+
+                    priceValue = resultBigInteger.intValue();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            NumberFormat nf = NumberFormat.getCurrencyInstance();
+                            price.setText(nf.format(priceValue));
+                        }
+                    });
+                }
+            }
+        }).start();
     }
 }
