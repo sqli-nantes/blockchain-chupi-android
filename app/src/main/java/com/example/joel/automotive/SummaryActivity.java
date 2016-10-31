@@ -15,6 +15,8 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import ethereumjava.module.objects.Hash;
+import ethereumjava.solidity.SolidityUtils;
 import ethereumjava.solidity.types.SUInt;
 
 /**
@@ -30,7 +32,7 @@ public class SummaryActivity extends AppCompatActivity {
     private Bundle bundle;
 
 
-    int priceValue;
+    BigInteger priceValue;
 
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
@@ -93,6 +95,14 @@ public class SummaryActivity extends AppCompatActivity {
         btn_accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                StartRent();
+
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 Intent intent = new Intent(SummaryActivity.this,TravelActivity.class);
                 startActivity(intent);
             }
@@ -112,16 +122,23 @@ public class SummaryActivity extends AppCompatActivity {
             from.setText(bundle.getString(Constants.FROM).replaceAll("\\+"," "));
             destination.setText(bundle.getString(Constants.DESTINATION).replaceAll("\\+"," "));
 
-            //TODO call GetPrice
-
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            GetPrice();
 
             car_img.setImageBitmap(((Car) bundle.getSerializable(Constants.CAR)).getImage());
         }
+    }
+
+    private void StartRent(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final MyApplication application = (MyApplication) getApplication();
+                boolean unlocked = application.ethereumjava.personal.unlockAccount(application.accountId, MyApplication.PASSWORD, 3600);
+                if (unlocked) {
+                    application.choupetteContract.StartRent().sendTransaction(application.accountId, new BigInteger("90000"));
+                }
+            }
+        }).start();
     }
 
 
@@ -133,15 +150,13 @@ public class SummaryActivity extends AppCompatActivity {
                 boolean unlocked = application.ethereumjava.personal.unlockAccount(application.accountId, MyApplication.PASSWORD, 3600);
                 if (unlocked) {
                     SUInt.SUInt256 result = (SUInt.SUInt256)application.choupetteContract.GetPrice().call();
-                    BigInteger resultBigInteger = (BigInteger) result.get();
-
-                    priceValue = resultBigInteger.intValue();
+                    priceValue = (BigInteger) result.get();
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             NumberFormat nf = NumberFormat.getCurrencyInstance();
-                            price.setText(nf.format(priceValue));
+                            price.setText(nf.format(priceValue.intValue()));
                         }
                     });
                 }
