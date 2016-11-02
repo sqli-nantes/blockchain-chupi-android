@@ -53,7 +53,7 @@ public class SelectedDestinationActivity extends AppCompatActivity implements Vi
         go_tardis = (AppCompatButton) findViewById(R.id.btn_tardis);
         go_lego = (AppCompatButton) findViewById(R.id.btn_lego);
         car = (Car) getIntent().getExtras().getSerializable(Constants.CAR);
-        origin = ("Cité des congrès");
+        origin = ("Cité des Congrès");
 
 
         //dest = (Address) destinationAddress;

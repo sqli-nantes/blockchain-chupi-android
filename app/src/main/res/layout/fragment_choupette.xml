@@ -44,249 +44,252 @@
             android:id="@+id/lay_choupette">
 
             <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:baselineAligned="false"
                 tools:ignore="UselessParent">
 
                 <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/viewA"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:orientation="vertical"
-                android:layout_gravity="top">
-
-                <ImageView android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/car_img"
-                    android:src="@drawable/choupette"
-                    android:background="#fff"
-                    android:contentDescription="@string/img_car_picture" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/viewB"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.4"
-                android:orientation="horizontal"
-                android:background="#ffffff"
-                tools:ignore="NestedWeights">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:orientation="vertical"
+                        android:id="@+id/viewA"
                         android:layout_width="match_parent"
-                        android:layout_height="194dp"
-                        android:padding="20dp">
+                        android:layout_height="150dp"
+                        android:orientation="vertical"
+                        android:layout_gravity="top">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <ImageView android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="@string/txt_car_name"
-                            android:id="@+id/car_name" />
+                            android:id="@+id/car_img"
+                            android:src="@drawable/choupette"
+                            android:background="#fff"
+                            android:contentDescription="@string/img_car_picture" />
+                    </LinearLayout>
 
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:text="@string/txt_constructor_name"
-                                android:id="@+id/car_manufacturer"
-                                tools:ignore="TooDeepLayout" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:text="@string/typo_separateur" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:text="@string/txt_car_model_name"
-                                android:id="@+id/car_model" />
-                        </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/viewB"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.4"
+                        android:orientation="horizontal"
+                        android:background="#ffffff"
+                        tools:ignore="NestedWeights">
+
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_weight="1"
-                            android:id="@+id/infos"
-                            android:visibility="gone">
+                            android:layout_height="match_parent">
 
                             <LinearLayout
-                                android:orientation="horizontal"
+                                android:orientation="vertical"
                                 android:layout_width="match_parent"
-                                android:layout_height="fill_parent"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_weight="1"
-                                android:baselineAligned="false">
+                                android:layout_height="194dp"
+                                android:padding="20dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceLarge"
+                                    android:text="@string/txt_car_name"
+                                    android:id="@+id/car_name" />
+
                                 <LinearLayout
                                     android:orientation="horizontal"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_weight="1"
-                                    android:weightSum="1" >
-
-                                    <ImageView
-                                        android:layout_width="70dp"
-                                        android:layout_height="70dp"
-                                        android:id="@+id/a1"
-                                        android:src="@drawable/ic_favorite"
-                                        android:layout_weight="0.46"
-                                        android:layout_gravity="center"
-                                        android:tint="@color/colorAccent"
-                                        android:contentDescription="@string/img_love"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/txt_constructor_name"
+                                        android:id="@+id/car_manufacturer"
                                         tools:ignore="TooDeepLayout" />
-
                                     <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:textAppearance="?android:attr/textAppearanceMedium"
-                                        android:text="@string/txt_car_rate"
-                                        android:id="@+id/textViewd3"
-                                        android:layout_weight="0.46"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_gravity="center"
-                                        android:gravity="center_vertical"
-                                        tools:ignore="RtlHardcoded" />
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textAppearance="?android:attr/textAppearanceSmall"
+                                        android:text="@string/typo_separateur" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textAppearance="?android:attr/textAppearanceSmall"
+                                        android:text="@string/txt_car_model_name"
+                                        android:id="@+id/car_model" />
                                 </LinearLayout>
                                 <LinearLayout
-                                    android:orientation="horizontal"
+                                    android:orientation="vertical"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="0dp"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_weight="1"
-                                    android:weightSum="1" >
+                                    android:id="@+id/infos"
+                                    android:visibility="gone">
 
-                                    <ImageView
-                                        android:layout_width="70dp"
-                                        android:layout_height="70dp"
-                                        android:id="@+id/a2"
-                                        android:src="@drawable/ic_comment"
-                                        android:layout_weight="0.46"
-                                        android:layout_gravity="center"
-                                        android:tint="@color/colorAccent"
-                                        android:contentDescription="@string/img_not_describe" />
+                                    <LinearLayout
+                                        android:orientation="horizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="fill_parent"
+                                        android:layout_gravity="center_horizontal"
+                                        android:layout_weight="1"
+                                        android:baselineAligned="false">
+                                        <LinearLayout
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_weight="1"
+                                            android:weightSum="1" >
 
-                                    <TextView
+                                            <ImageView
+                                                android:layout_width="70dp"
+                                                android:layout_height="70dp"
+                                                android:id="@+id/a1"
+                                                android:src="@drawable/ic_favorite"
+                                                android:layout_weight="0.46"
+                                                android:layout_gravity="center"
+                                                android:tint="@color/colorAccent"
+                                                android:contentDescription="@string/img_love"
+                                                tools:ignore="TooDeepLayout" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                                                android:text="@string/txt_car_rate"
+                                                android:id="@+id/textViewd3"
+                                                android:layout_weight="0.46"
+                                                android:layout_marginLeft="10dp"
+                                                android:layout_gravity="center"
+                                                android:gravity="center_vertical"
+
+                                                tools:ignore="RtlHardcoded" />
+                                        </LinearLayout>
+                                        <LinearLayout
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_weight="1"
+                                            android:weightSum="1" >
+
+                                            <ImageView
+                                                android:layout_width="70dp"
+                                                android:layout_height="70dp"
+                                                android:id="@+id/a2"
+                                                android:src="@drawable/ic_comment"
+                                                android:layout_weight="0.46"
+                                                android:layout_gravity="center"
+                                                android:tint="@color/colorAccent"
+                                                android:contentDescription="@string/img_not_describe" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:textAppearance="@android:style/TextAppearance.Material.Small"
+                                                android:text="@string/txt_max_score"
+                                                android:id="@+id/textView3"
+                                                android:textSize="14sp"
+                                                android:layout_weight="0.46"
+                                                android:layout_marginLeft="10dp"
+                                                android:layout_gravity="center"
+                                                android:gravity="center_vertical"
+                                                tools:ignore="RtlHardcoded" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:orientation="horizontal"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:textAppearance="?android:attr/textAppearanceMedium"
-                                        android:text="@string/txt_max_score"
-                                        android:id="@+id/textView3"
-                                        android:layout_weight="0.46"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_gravity="center"
-                                        android:gravity="center_vertical"
-                                        tools:ignore="RtlHardcoded" />
+                                        android:layout_gravity="center_horizontal"
+                                        android:layout_weight="1"
+                                        android:baselineAligned="false" >
+
+                                        <LinearLayout
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_weight="1"
+                                            android:weightSum="1" >
+
+                                            <ImageView
+                                                android:layout_width="70dp"
+                                                android:layout_height="70dp"
+                                                android:id="@+id/a3"
+                                                android:src="@drawable/ic_directions"
+                                                android:layout_weight="0.46"
+                                                android:layout_gravity="center"
+                                                android:tint="@color/colorAccent"
+                                                android:contentDescription="@string/img_not_describe" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:text="@string/txt_distance"
+                                                android:id="@+id/textVidew3"
+                                                android:layout_weight="0.46"
+                                                android:textSize="14sp"
+                                                android:layout_marginLeft="10dp"
+                                                android:layout_gravity="center"
+                                                android:gravity="center_vertical"
+                                                tools:ignore="RtlHardcoded" />
+                                        </LinearLayout>
+                                        <LinearLayout
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_weight="1"
+                                            android:weightSum="1" >
+
+                                            <ImageView
+                                                android:layout_width="70dp"
+                                                android:layout_height="70dp"
+                                                android:id="@+id/a4"
+                                                android:src="@drawable/ic_build"
+                                                android:layout_weight="0.46"
+                                                android:layout_gravity="center"
+                                                android:tint="@color/colorAccent"
+                                                android:contentDescription="@string/img_not_describe" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                                android:text="@string/txt_report_bug"
+                                                android:id="@+id/textcVidew3"
+                                                android:layout_weight="0.46"
+                                                android:layout_marginLeft="10dp"
+                                                android:textSize="14sp"
+                                                android:layout_gravity="center"
+                                                android:gravity="center_vertical"
+                                                tools:ignore="RtlHardcoded" />
+                                        </LinearLayout>
+                                    </LinearLayout>
                                 </LinearLayout>
 
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:orientation="horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_weight="1"
-                                android:baselineAligned="false" >
-
-                                <LinearLayout
-                                    android:orientation="horizontal"
+                                <!--Le trait de séparation menu déroulant-->
+                                <View
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_weight="1"
-                                    android:weightSum="1" >
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="20dp"
+                                    android:background="@android:color/darker_gray"
+                                    android:layout_marginBottom="15dp"/>
 
-                                    <ImageView
-                                        android:layout_width="70dp"
-                                        android:layout_height="70dp"
-                                        android:id="@+id/a3"
-                                        android:src="@drawable/ic_directions"
-                                        android:layout_weight="0.46"
-                                        android:layout_gravity="center"
-                                        android:tint="@color/colorAccent"
-                                        android:contentDescription="@string/img_not_describe" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:textAppearance="?android:attr/textAppearanceMedium"
-                                        android:text="@string/txt_distance"
-                                        android:id="@+id/textVidew3"
-                                        android:layout_weight="0.46"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_gravity="center"
-                                        android:gravity="center_vertical"
-                                        tools:ignore="RtlHardcoded" />
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:orientation="horizontal"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_weight="1"
-                                    android:weightSum="1" >
-
-                                    <ImageView
-                                        android:layout_width="70dp"
-                                        android:layout_height="70dp"
-                                        android:id="@+id/a4"
-                                        android:src="@drawable/ic_build"
-                                        android:layout_weight="0.46"
-                                        android:layout_gravity="center"
-                                        android:tint="@color/colorAccent"
-                                        android:contentDescription="@string/img_not_describe" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:textAppearance="?android:attr/textAppearanceMedium"
-                                        android:text="@string/txt_report_bug"
-                                        android:id="@+id/textcVidew3"
-                                        android:layout_weight="0.46"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_gravity="center"
-                                        android:gravity="center_vertical"
-                                        tools:ignore="RtlHardcoded" />
-                                </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
 
-                        <!--Le trait de séparation menu déroulant-->
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="20dp"
-                            android:background="@android:color/darker_gray"
-                            android:layout_marginBottom="15dp"/>
-
                     </LinearLayout>
                 </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
