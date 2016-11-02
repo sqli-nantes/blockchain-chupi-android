@@ -130,7 +130,7 @@ public class SummaryActivity extends AppCompatActivity {
                 final MyApplication application = (MyApplication) getApplication();
                 boolean unlocked = application.ethereumjava.personal.unlockAccount(application.accountId, MyApplication.PASSWORD, 3600);
                 if (unlocked) {
-                    application.choupetteContract.StartRent().sendTransaction(application.accountId, new BigInteger("90000"));
+                    application.choupetteContract.StartRent().sendTransaction(application.accountId, new BigInteger("90000"),priceValue);
                 }
             }
         }).start();

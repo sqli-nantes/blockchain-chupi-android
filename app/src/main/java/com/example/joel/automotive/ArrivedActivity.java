@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.math.BigInteger;
+
 
 /**
  * Created by alb on 25/10/16.
@@ -34,11 +36,39 @@ public class ArrivedActivity extends AppCompatActivity {
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ArrivedActivity.this, EndActivity.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                ValidateTravel();
+
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                GoToEndActivity();
             }
         });
+
+
+    }
+
+    private void ValidateTravel(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final MyApplication application = (MyApplication) getApplication();
+                boolean unlocked = application.ethereumjava.personal.unlockAccount(application.accountId, MyApplication.PASSWORD, 3600);
+                if (unlocked) {
+                    application.choupetteContract.ValidateTravel().sendTransaction(application.accountId, new BigInteger("90000"));
+                }
+            }
+        }).start();
+    }
+
+
+    private void GoToEndActivity(){
+        Intent intent = new Intent(ArrivedActivity.this, EndActivity.class);
+        startActivity(intent);
     }
 
     @Override

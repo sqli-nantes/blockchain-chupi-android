@@ -25,6 +25,7 @@ public class QrScanActivity extends AppCompatActivity implements ZBarScannerView
         super.onCreate(state);
         mScannerView = new ZBarScannerView(this);    // Programmatically initialize the scanner view
         setContentView(mScannerView);                // Set the scanner view as the content view
+
     }
 
     @Override

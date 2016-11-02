@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.sqli.blockchain.android_geth.EthereumService;
 
+import java.util.ArrayList;
+
 /**
  * Created by joel on 04/08/16.
  * Ceci est la copie du mainActivity initial
@@ -37,8 +39,17 @@ import com.sqli.blockchain.android_geth.EthereumService;
         fab_qr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,QrScanActivity.class);
+
+                ArrayList<String> urls = new ArrayList();
+                String url = "http://10.33.44.182:8080";
+                urls.add(url);
+
+                Intent intent = new Intent(MainActivity.this,DetectedCarActivity.class);
+                intent.putStringArrayListExtra(Constants.URLSCAN,urls);
                 startActivity(intent);
+
+                //Intent intent = new Intent(MainActivity.this,QrScanActivity.class);
+                //startActivity(intent);
 //                overridePendingTransition(0,0);
             }
         });

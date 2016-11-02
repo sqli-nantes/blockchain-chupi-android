@@ -4,9 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.math.BigInteger;
+
+import ethereumjava.module.objects.Transaction;
+import ethereumjava.solidity.types.SUInt;
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Created by joel on 01/08/16.
@@ -19,15 +27,55 @@ public class TravelActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inprogress);
 
-        AppCompatButton btn = (AppCompatButton) findViewById(R.id.btn_destination) ;
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        new Thread(new Runnable() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TravelActivity.this, ArrivedActivity.class);
-                startActivity(intent);
+            public void run() {
+
+                try {
+                    Thread.sleep(5000);
+
+                    GoToArrivedActivity();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
-        });
+        }).start();
+
+/*        final MyApplication application = (MyApplication) getApplication();
+        boolean unlocked = application.ethereumjava.personal.unlockAccount(application.accountId,MyApplication.PASSWORD,3600);
+        if( unlocked ) {
+            Observable<SUInt.SUInt256> onStateChangedObservable = application.choupetteContract.OnStateChanged().watch();
+            onStateChangedObservable.subscribe(new Subscriber<SUInt.SUInt256>() {
+                @Override
+                public void onCompleted() {
+                    Log.e("GETH","ONSTATECHANGED -- COMPLETED");
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    Log.e("GETH",e.getMessage());
+                }
+
+                @Override
+                public void onNext(SUInt.SUInt256 res) {
+                    if( res != null ) {
+                        Log.d("GETH", res.asString());
+                        GoToArrivedActivity();
+                    }else{
+                        Log.e("GETH","STATE NULL");
+                    }
+                }
+            });
+        }*/
+
+    }
+
+    private void GoToArrivedActivity(){
+        Intent intent = new Intent(TravelActivity.this, ArrivedActivity.class);
+        startActivity(intent);
     }
 
     @Override

@@ -101,7 +101,7 @@ public class ChoupetteFragment extends Fragment {
                             }
                         });*/
 
-                        Thread.sleep(5000);
+                        Thread.sleep(2000);
                         goToSelectDestinationActivity();
 
                     }catch(Exception e){
