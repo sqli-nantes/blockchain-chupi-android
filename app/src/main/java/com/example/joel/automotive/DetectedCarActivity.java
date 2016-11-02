@@ -27,6 +27,8 @@ import java.util.List;
 
 /**
  * Created by gunicolas on 28/07/16.
+ * Activité permettant le choix de la voiture à louer
+ *
  */
 public class DetectedCarActivity extends AppCompatActivity{
 
@@ -95,7 +97,28 @@ public class DetectedCarActivity extends AppCompatActivity{
     private void getCarInfos(String url) {
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        JsonObjectRequest getInfosJSON = new JsonObjectRequest(Request.Method.GET, url+"/toto.json",null,new Response.Listener<JSONObject>() {
+//Ne prends en compte que la voiture "Choupette"
+//        JsonObjectRequest getInfosJSON = new JsonObjectRequest(Request.Method.GET, url+"/toto.json",null,new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                try {
+//                    car.setName(response.getString("name"));
+//                    car.setManufacturer(response.getString("manufacturer"));
+//                    car.setModel(response.getString("model"));
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        },
+//        new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.d(TAG,error.toString());
+//            }
+//        });
+
+//Passage en dur de l'adresse IP pour faire les tests sans lecture du QRcode
+        JsonObjectRequest getInfosJSON = new JsonObjectRequest(Request.Method.GET, "http://10.33.44.57:8080/toto.json",null,new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -107,12 +130,12 @@ public class DetectedCarActivity extends AppCompatActivity{
                 }
             }
         },
-        new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(TAG,error.toString());
-            }
-        });
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG,error.toString());
+                    }
+                });
 
         queue.add(getInfosJSON);
 
