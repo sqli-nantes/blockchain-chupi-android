@@ -49,7 +49,7 @@ public class SelectedDestinationActivity extends AppCompatActivity {
         go_tardis = (AppCompatButton) findViewById(R.id.btn_tardis);
         go_lego = (AppCompatButton) findViewById(R.id.btn_lego);
         car = (Car) getIntent().getExtras().getSerializable(Constants.CAR);
-        origin = ("Cité des congrès");
+        origin = ("Cité des Congrès");
 
 
         //dest = (Address) destinationAddress;
@@ -72,10 +72,10 @@ public class SelectedDestinationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
-//                destination.setDestinationName("La cantine du numerique");
+//                destination.setDestinationName("La cantine numerique");
                 intent.putExtra(Constants.CAR, car);
                 intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "La cantine du numerique (Nantes)");
+                intent.putExtra(Constants.DESTINATION, "La Cantine du numérique (Nantes)");
                 intent.putExtra(Constants.PRICE, 0.6);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -88,7 +88,7 @@ public class SelectedDestinationActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
                 intent.putExtra(Constants.CAR, car);
                 intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "Le dernier bar avant la fin du monde (Paris I)");
+                intent.putExtra(Constants.DESTINATION, "Le Dernier Bar avant la Fin du Monde (Paris I)");
                 intent.putExtra(Constants.PRICE, 382.0);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -100,7 +100,7 @@ public class SelectedDestinationActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
                 intent.putExtra(Constants.CAR, car);
                 intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "Le Tardis (London, England)");
+                intent.putExtra(Constants.DESTINATION, "Le Tardis (London - England)");
                 intent.putExtra(Constants.PRICE, 778.65);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -112,7 +112,7 @@ public class SelectedDestinationActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
                 intent.putExtra(Constants.CAR, car);
                 intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "LegoLand (Billung, Danemark)");
+                intent.putExtra(Constants.DESTINATION, "LegoLand (Billung - Danemark)");
                 intent.putExtra(Constants.PRICE, 1553.0);
                 startActivity(intent);
                 overridePendingTransition(0, 0);

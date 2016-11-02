@@ -18,7 +18,7 @@
     <string name="legoland">Legoland (Danemark)</string>
     <string name="btn_londres">Le tardis - Londres</string>
     <string name="btn_sqli">Agence SQLI - Nantes</string>
-    <string name="destination_text">Selectionnez votre destination:</string>
+    <string name="destination_text">Sélectionnez votre destination :</string>
     <string name="tardis">Tardis</string>
     <string name="text_GoodBye">Merci d\'avoir utilisé l\'application</string>
     <string name="txt_end_image">End image</string>
@@ -46,7 +46,7 @@
     <string name="img_not_describe">is this img exist</string>
     <string name="img_love">img_love</string>
     <string name="ttl_selected_car">Véhicule sélectionné</string>
-    <string name="btn_accept">j\'accepte et je paye</string>
+    <string name="btn_accept">j\'accepte et je paie</string>
     <string name="ttl_end_api">Crédit</string>
     <string name="btn_returnHome">début démo</string>
     <string name="img_cc_arrived">image car arrived</string>
