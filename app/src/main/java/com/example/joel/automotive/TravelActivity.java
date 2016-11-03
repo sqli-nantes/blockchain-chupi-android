@@ -37,7 +37,7 @@ public class TravelActivity extends AppCompatActivity{
                 }
 
             }
-        });
+        }).start();
     }
 
     private void GoToArrivedActivity(){
