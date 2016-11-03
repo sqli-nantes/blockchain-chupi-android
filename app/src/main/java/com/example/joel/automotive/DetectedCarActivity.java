@@ -117,8 +117,7 @@ public class DetectedCarActivity extends AppCompatActivity{
 //            }
 //        });
 
-//Passage en dur de l'adresse IP pour faire les tests sans lecture du QRcode
-        JsonObjectRequest getInfosJSON = new JsonObjectRequest(Request.Method.GET, "http://10.33.44.57:8080/toto.json",null,new Response.Listener<JSONObject>() {
+        JsonObjectRequest getInfosJSON = new JsonObjectRequest(Request.Method.GET, url+"/",null,new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {

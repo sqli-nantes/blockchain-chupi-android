@@ -40,16 +40,8 @@ import java.util.ArrayList;
             @Override
             public void onClick(View view) {
 
-                ArrayList<String> urls = new ArrayList();
-                String url = "http://10.33.44.182:8080";
-                urls.add(url);
-
-                Intent intent = new Intent(MainActivity.this,DetectedCarActivity.class);
-                intent.putStringArrayListExtra(Constants.URLSCAN,urls);
+                Intent intent = new Intent(MainActivity.this,QrScanActivity.class);
                 startActivity(intent);
-
-                //Intent intent = new Intent(MainActivity.this,QrScanActivity.class);
-                //startActivity(intent);
 //                overridePendingTransition(0,0);
             }
         });
