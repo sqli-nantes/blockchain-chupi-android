@@ -89,7 +89,7 @@ public class MyApplication extends EthereumApplication {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("GETH",error.getMessage());
+                Log.e("GETH","error getMoney()");
             }
         });
 
