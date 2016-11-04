@@ -15,7 +15,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.global">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC8B3jBrl-9yS0v0YYi-mYuB3SSmmUmqoE" />
@@ -61,7 +61,9 @@
         <activity
             android:name=".DetectedCarActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait" />
+        <!--android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"-->
         <activity
             android:name=".MapsActivity"
             android:configChanges="orientation|keyboardHidden"

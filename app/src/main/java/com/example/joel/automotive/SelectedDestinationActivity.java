@@ -72,10 +72,10 @@ public class SelectedDestinationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SelectedDestinationActivity.this, SummaryActivity.class);
-//                destination.setDestinationName("La cantine numerique");
+//                destination.setDestinationName("La Cantine numérique");
                 intent.putExtra(Constants.CAR, car);
                 intent.putExtra(Constants.FROM, origin);
-                intent.putExtra(Constants.DESTINATION, "La Cantine du numérique (Nantes)");
+                intent.putExtra(Constants.DESTINATION, "La Cantine numérique (Nantes)");
                 intent.putExtra(Constants.PRICE, 0.6);
                 startActivity(intent);
                 overridePendingTransition(0, 0);

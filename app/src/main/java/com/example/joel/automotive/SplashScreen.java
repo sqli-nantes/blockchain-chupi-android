@@ -13,7 +13,7 @@ import android.util.Log;
 public class SplashScreen extends Activity {
 
     /** Délais attente **/
-    private final int SPLASH_DISPLAY_LENGTH = 800;
+    private final int SPLASH_DISPLAY_LENGTH = 900;
 
     /** Appel à la premiere création d'activité. */
     @Override
