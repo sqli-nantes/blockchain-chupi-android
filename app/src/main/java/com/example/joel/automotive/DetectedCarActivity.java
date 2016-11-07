@@ -163,13 +163,6 @@ public class DetectedCarActivity extends AppCompatActivity{
         overridePendingTransition(0,0);
     }
 
-    @Override
-    public void onBackPressed(){
-        Toast.makeText(DetectedCarActivity.this, R.string.nepastoucher,
-                Toast.LENGTH_SHORT).show();
-        return;
-
-    }
 
     @Override
     protected void onDestroy() {

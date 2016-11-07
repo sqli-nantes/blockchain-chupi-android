@@ -1,7 +1,9 @@
 package com.example.joel.automotive;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -76,11 +78,18 @@ public class ArrivedActivity extends AppCompatActivity {
 
 
     @Override
-    public void onBackPressed(){
-        Toast.makeText(ArrivedActivity.this, R.string.nepastoucher,
-                Toast.LENGTH_SHORT).show();
-        return;
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Cette action va arrêter la transaction")
+                .setMessage("Retour à l'accueil?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        ArrivedActivity.super.onBackPressed();
+                    }
+                }).create().show();
     }
 
 //  Pour envoyer les infos de voyage dans la page. Caduque pour le DevFest (actuellement, ne fonctionne pas)

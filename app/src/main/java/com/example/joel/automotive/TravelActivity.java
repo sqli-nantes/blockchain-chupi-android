@@ -1,7 +1,9 @@
 package com.example.joel.automotive;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.Menu;
@@ -64,11 +66,19 @@ public class TravelActivity extends AppCompatActivity{
         startActivity(intent);
         overridePendingTransition(0,0);
     }
-    @Override
-    public void onBackPressed(){
-        Toast.makeText(TravelActivity.this, R.string.nepastoucher,
-                Toast.LENGTH_SHORT).show();
-        return;
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Cette action va arrêter la transaction")
+                .setMessage("Retour à l'accueil?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        TravelActivity.super.onBackPressed();
+                    }
+                }).create().show();
     }
 }
