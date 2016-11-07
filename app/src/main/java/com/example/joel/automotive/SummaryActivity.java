@@ -1,8 +1,10 @@
 package com.example.joel.automotive;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -161,10 +163,18 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
-        Toast.makeText(SummaryActivity.this, R.string.nepastoucher,
-                Toast.LENGTH_SHORT).show();
-        return;
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Cette action va arrêter la transaction")
+                .setMessage("Retour à l'accueil?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        SummaryActivity.super.onBackPressed();
+                    }
+                }).create().show();
     }
+
 }

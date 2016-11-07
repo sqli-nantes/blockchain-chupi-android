@@ -1,5 +1,7 @@
 package com.example.joel.automotive;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -83,13 +85,19 @@ public class SelectedDestinationActivity extends AppCompatActivity implements Vi
     }
 
 
-
     @Override
-    public void onBackPressed(){
-        Toast.makeText(SelectedDestinationActivity.this, R.string.nepastoucher,
-                Toast.LENGTH_SHORT).show();
-        return;
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Cette action va arrêter la transaction")
+                .setMessage("Retour à l'accueil?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        SelectedDestinationActivity.super.onBackPressed();
+                    }
+                }).create().show();
     }
 
     @Override
