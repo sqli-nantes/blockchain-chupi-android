@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
 
@@ -77,7 +78,7 @@ public class SummaryActivity extends AppCompatActivity {
         price = (TextView) findViewById(R.id.txt_price);
 //        car_img = (ImageView) findViewById(R.id.car_img);
         btn_accept = (Button) findViewById(R.id.btn_accept);
-        btn_cancel = (Button) findViewById(R.id.btn_cancel);
+//        btn_cancel = (Button) findViewById(R.id.btn_cancel);
 
         btn_accept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,13 +89,13 @@ public class SummaryActivity extends AppCompatActivity {
             }
         });
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SummaryActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        btn_cancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(SummaryActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         bundle = getIntent().getExtras();
 
@@ -105,5 +106,13 @@ public class SummaryActivity extends AppCompatActivity {
             price.setText(nf.format(bundle.getDouble(Constants.PRICE)));
 //            car_img.setImageBitmap(((Car) bundle.getSerializable(Constants.CAR)).getImage());
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(SummaryActivity.this, R.string.nepastoucher,
+                Toast.LENGTH_SHORT).show();
+        return;
+
     }
 }

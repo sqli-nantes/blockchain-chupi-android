@@ -7,6 +7,7 @@ import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -76,5 +77,13 @@ public class QrScanActivity extends AppCompatActivity implements ZBarScannerView
         Intent intent = new Intent(mScannerView.getContext(),DetectedCarActivity.class);
         intent.putStringArrayListExtra(Constants.URLSCAN,urls);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(QrScanActivity.this, R.string.nepastoucher,
+                Toast.LENGTH_SHORT).show();
+        return;
+
     }
 }
