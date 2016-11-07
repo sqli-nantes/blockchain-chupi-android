@@ -72,6 +72,14 @@ import java.util.ArrayList;
         super.onDestroy();
     }
 
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(MainActivity.this, R.string.nepastoucher,
+                Toast.LENGTH_SHORT).show();
+        return;
+
+    }
+
 
 
 

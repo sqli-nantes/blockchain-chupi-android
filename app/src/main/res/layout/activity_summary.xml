@@ -110,15 +110,15 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1" />
 
-    <Button
-            android:layout_width="189dp"
-            android:layout_height="wrap_content"
-            style="@style/Second_Button"
-            android:text="@string/btn_refuse"
-            android:id="@+id/btn_cancel"
-            android:layout_gravity="center"
-            android:layout_weight="0.07"
-            android:nestedScrollingEnabled="false" />
+    <!--<Button-->
+            <!--android:layout_width="189dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--style="@style/Second_Button"-->
+            <!--android:text="@string/btn_refuse"-->
+            <!--android:id="@+id/btn_cancel"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_weight="0.07"-->
+            <!--android:nestedScrollingEnabled="false" />-->
 
 
 </LinearLayout>

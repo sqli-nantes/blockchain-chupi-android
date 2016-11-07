@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 /**
@@ -75,5 +76,12 @@ public class TravelActivity extends AppCompatActivity{
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         overridePendingTransition(0,0);
+    }
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(TravelActivity.this, R.string.nepastoucher,
+                Toast.LENGTH_SHORT).show();
+        return;
+
     }
 }

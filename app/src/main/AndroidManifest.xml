@@ -63,7 +63,9 @@
         <activity
             android:name=".DetectedCarActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait" />
+        <!--android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"-->
         <activity
             android:name=".MapsActivity"
             android:configChanges="orientation|keyboardHidden"

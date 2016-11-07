@@ -50,4 +50,5 @@
     <string name="ttl_end_api">Crédit</string>
     <string name="btn_returnHome">début démo</string>
     <string name="img_cc_arrived">image car arrived</string>
+    <string name="nepastoucher">Pour les besoins de la démos, merci de ne pas toucher ce bouton.</string>
 </resources>

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -164,9 +165,11 @@ public class DetectedCarActivity extends AppCompatActivity{
     }
 
     @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+    public void onBackPressed(){
+        Toast.makeText(DetectedCarActivity.this, R.string.nepastoucher,
+                Toast.LENGTH_SHORT).show();
+        return;
+
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.View;
 import android.location.Address;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.math.BigInteger;
 
@@ -82,10 +83,13 @@ public class SelectedDestinationActivity extends AppCompatActivity implements Vi
     }
 
 
+
     @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public void onBackPressed(){
+        Toast.makeText(SelectedDestinationActivity.this, R.string.nepastoucher,
+                Toast.LENGTH_SHORT).show();
+        return;
+
     }
 
     @Override
