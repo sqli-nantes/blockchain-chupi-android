@@ -29,7 +29,7 @@ public class TravelActivity extends AppCompatActivity{
             public void run() {
 
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(15000);
 
                     GoToArrivedActivity();
 
@@ -38,7 +38,7 @@ public class TravelActivity extends AppCompatActivity{
                 }
 
             }
-        });
+        }).start();
     }
 
     private void GoToArrivedActivity(){
