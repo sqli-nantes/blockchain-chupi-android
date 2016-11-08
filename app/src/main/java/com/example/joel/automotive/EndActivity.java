@@ -67,11 +67,11 @@ public class EndActivity extends AppCompatActivity {
         overridePendingTransition(0,0);
     }
 
-    @Override
-    public void onBackPressed(){
-        Toast.makeText(EndActivity.this, R.string.nepastoucher,
-                Toast.LENGTH_SHORT).show();
-        return;
-
-    }
+//    @Override
+//    public void onBackPressed(){
+//        Toast.makeText(EndActivity.this, R.string.nepastoucher,
+//                Toast.LENGTH_SHORT).show();
+//        return;
+//
+//    }
 }

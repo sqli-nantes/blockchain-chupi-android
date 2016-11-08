@@ -117,7 +117,7 @@ public class ArrivedActivity extends AppCompatActivity {
 
 
                     public void onClick(DialogInterface arg0, int arg1) {
-                        ArrivedActivity.super.onBackPressed();
+                        goToMainActivity();
                     }
                 }).create().show();
     }
