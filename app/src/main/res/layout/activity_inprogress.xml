@@ -35,17 +35,17 @@
             />
         
     </RelativeLayout>
-    <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="0.25">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/txt_tmp"
-            android:id="@+id/btn_destination"
-            style="@style/Second_Button"
-            android:nestedScrollingEnabled="false"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="0.25">-->
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:text="@string/txt_tmp"-->
+            <!--android:id="@+id/btn_destination"-->
+            <!--style="@style/Second_Button"-->
+            <!--android:nestedScrollingEnabled="false"-->
+            <!--android:layout_centerHorizontal="true" />-->
+    <!--</RelativeLayout>-->
 </LinearLayout>
