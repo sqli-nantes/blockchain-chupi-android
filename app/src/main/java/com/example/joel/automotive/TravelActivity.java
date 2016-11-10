@@ -17,6 +17,15 @@ import android.view.View;
 public class TravelActivity extends AppCompatActivity{
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        menu.removeItem(R.id.action_refresh);
+        menu.removeItem(R.id.action_back);
+        return true;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inprogress);
@@ -30,15 +39,6 @@ public class TravelActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        menu.removeItem(R.id.action_refresh);
-        menu.removeItem(R.id.action_back);
-        return true;
     }
 
     @Override

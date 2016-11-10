@@ -17,7 +17,7 @@ import android.view.MenuItem;
 public class SelectedDestinationActivity extends AppCompatActivity {
 // Pour passer outre la map et proposer 5 trajets précalculés
 // Doit se placer entre DetectedCarActivity et Summary Activity
-//    necessite les informations car
+//    necessite les informations "car".
 
 
     private Car car;
