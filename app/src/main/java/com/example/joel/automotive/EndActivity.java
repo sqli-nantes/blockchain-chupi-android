@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 // Activité de fin de scenario.
 // Suit TravelActivity
@@ -65,4 +66,12 @@ public class EndActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(0,0);
     }
+
+//    @Override
+//    public void onBackPressed(){
+//        Toast.makeText(EndActivity.this, R.string.nepastoucher,
+//                Toast.LENGTH_SHORT).show();
+//        return;
+//
+//    }
 }

@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
 //  Propose le choix de detection des véhicules
 // Choix : QR Code ou BlueTouch
 // entre SplashScreen et LoadingActivity ou QRScanActivity
@@ -38,6 +40,7 @@ public class ScanningChoiceActivity extends AppCompatActivity {
         fab_qr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(ScanningChoiceActivity.this,QrScanActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0,0);

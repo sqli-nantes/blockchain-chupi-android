@@ -1,12 +1,16 @@
 package com.example.joel.automotive;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 /**
@@ -30,15 +34,27 @@ public class TravelActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inprogress);
 
-        AppCompatButton btn = (AppCompatButton) findViewById(R.id.btn_destination) ;
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        new Thread(new Runnable() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TravelActivity.this, ArrivedActivity.class);
-                startActivity(intent);
+            public void run() {
+
+                try {
+                    Thread.sleep(20000);
+
+                    GoToArrivedActivity();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
-        });
+        }).start();
+    }
+
+    private void GoToArrivedActivity(){
+        Intent intent = new Intent(TravelActivity.this, ArrivedActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -62,5 +78,20 @@ public class TravelActivity extends AppCompatActivity{
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         overridePendingTransition(0,0);
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Cette action va arrêter la transaction")
+                .setMessage("Retour à l'accueil?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        goToMainActivity();
+                    }
+                }).create().show();
     }
 }

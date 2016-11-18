@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.sqli.blockchain.android_geth.EthereumService;
+
+import java.util.ArrayList;
 
 /**
  * Created by joel on 04/08/16.
@@ -18,7 +22,8 @@ import android.view.View;
 //
 
 //public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    public class MainActivity extends AppCompatActivity {
+    public class MainActivity extends AppCompatActivity implements EthereumService.EthereumServiceInterface{
+    MyApplication application;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +39,14 @@ import android.view.View;
         fab_qr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(MainActivity.this,QrScanActivity.class);
                 startActivity(intent);
 //                overridePendingTransition(0,0);
             }
         });
+        application = (MyApplication) getApplication();
+        application.registerGethReady(this);
     }
 
     @Override
@@ -54,5 +62,27 @@ import android.view.View;
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(MainActivity.this, R.string.nepastoucher,
+                Toast.LENGTH_SHORT).show();
+        return;
+
+    }
+
+
+
+
+    @Override
+    public void onEthereumServiceReady() {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this,"GETH READY",Toast.LENGTH_LONG);
+            }
+        });
     }
 }

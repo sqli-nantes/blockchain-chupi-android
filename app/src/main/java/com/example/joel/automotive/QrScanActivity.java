@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,6 +28,7 @@ public class QrScanActivity extends AppCompatActivity implements ZBarScannerView
         super.onCreate(state);
         mScannerView = new ZBarScannerView(this);    // Programmatically initialize the scanner view
         setContentView(mScannerView);                // Set the scanner view as the content view
+
     }
 
     @Override
@@ -34,6 +38,17 @@ public class QrScanActivity extends AppCompatActivity implements ZBarScannerView
         menu.removeItem(R.id.action_refresh);
         menu.removeItem(R.id.action_back);
         return true;
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, view, menuInfo);
+        menu.setHeaderTitle("Cette action va arrêter la transaction");
+        menu.add(0, view.getId(), 0, "Retour à l'acceuil");
+        menu.add(0, view.getId(), 0, "Annuler");
+
     }
 
     @Override
@@ -76,5 +91,13 @@ public class QrScanActivity extends AppCompatActivity implements ZBarScannerView
         Intent intent = new Intent(mScannerView.getContext(),DetectedCarActivity.class);
         intent.putStringArrayListExtra(Constants.URLSCAN,urls);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(QrScanActivity.this, R.string.nepastoucher,
+                Toast.LENGTH_SHORT).show();
+        return;
+
     }
 }

@@ -1,13 +1,18 @@
 package com.example.joel.automotive;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import java.math.BigInteger;
 
 
 /**
@@ -34,11 +39,39 @@ public class ArrivedActivity extends AppCompatActivity {
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ArrivedActivity.this, EndActivity.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                ValidateTravel();
+
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                GoToEndActivity();
             }
         });
+
+
+    }
+
+    private void ValidateTravel(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final MyApplication application = (MyApplication) getApplication();
+                boolean unlocked = application.ethereumjava.personal.unlockAccount(application.accountId, MyApplication.PASSWORD, 3600);
+                if (unlocked) {
+                    application.choupetteContract.ValidateTravel().sendTransaction(application.accountId, new BigInteger("90000"));
+                }
+            }
+        }).start();
+    }
+
+
+    private void GoToEndActivity(){
+        Intent intent = new Intent(ArrivedActivity.this, EndActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -71,6 +104,22 @@ public class ArrivedActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         overridePendingTransition(0,0);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Cette action va arrêter la transaction")
+                .setMessage("Retour à l'accueil?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        goToMainActivity();
+                    }
+                }).create().show();
     }
 
 //  Pour envoyer les infos de voyage dans la page. Caduque pour le DevFest (actuellement, ne fonctionne pas)
