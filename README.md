@@ -3,7 +3,12 @@ Blockchain-xXx-Mobile
 
 Application mobile de décentralisation de la location de véhicule par la blockchain.
 
-Développé pour Android 5.1.
+Testé sur Android 5.1. (Api 22)
+Paramètre de configuration pour les SDK : 
+> minSdkVersion 21 
+> targetSdkVersion 24
+Les nouvelles permissions disponibles dès Android 6 ne sont pas gérées.
+
 
 # scenario
 jim veut louer une voiture pour aller de A vers B.
@@ -22,38 +27,9 @@ jim veut louer une voiture pour aller de A vers B.
 ```
 # Architecture fichiers java:
 
-							--------------
-							|MainActivity|
-							--------------
-			|----------------------|----------------------|
-	-----------------								----------------
-	|LoadingActivity|								|QRScanActivity|
-	-----------------								----------------
-			|---------------------------------------------|
-									|
-						---------------------
-						|DetectedCarActivity|
-						---------------------
-									|
-					-----------------------------
-					|SelectedDestinationActivity|
-					-----------------------------
-								|
-						-----------------
-						|SummaryActivity|
-						-----------------
-								|
-						----------------
-						|TravelActivity|
-						----------------
-								|
-						-----------------
-						|ArrivedActivity|
-						-----------------
-								|
-							-------------
-							|EndActivity|
-							-------------
+
+![Architecture appli](./schemaArchiAndJim.jpg "Architecture appli")
+
 
 ```
 #Important
