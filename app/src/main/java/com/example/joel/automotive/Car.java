@@ -15,6 +15,7 @@ public class Car implements Serializable{
     private String name;
     private String manufacturer;
     private String model;
+    private String contractAddress;
 
     public Bitmap getImage(){
         return BitmapFactory.decodeByteArray(this.image, 0, this.image.length);
@@ -48,5 +49,13 @@ public class Car implements Serializable{
 
     public String getModel() {
         return this.model;
+    }
+
+    public String getContractAddress() {
+        return contractAddress;
+    }
+
+    public void setContractAddress(String contractAddress) {
+        this.contractAddress = contractAddress;
     }
 }

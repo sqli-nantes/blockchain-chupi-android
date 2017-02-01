@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.math.BigInteger;
+
+import ethereumjava.exception.EthereumJavaException;
+import ethereumjava.module.objects.Hash;
+import ethereumjava.module.objects.Transaction;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by joel on 03/08/16.
@@ -55,10 +66,50 @@ public class ChoupetteFragment extends Fragment {
 
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),SelectedDestinationActivity.class);
-                intent.putExtra(Constants.CAR,car);
-                startActivity(intent);
+            public void onClick(final View view) {
+                final MyApplication application = (MyApplication) getActivity().getApplication();
+                application.setContractAtAdress(car.getContractAddress());
+                boolean unlocked = application.ethereumjava.personal.unlockAccount(application.accountId,MyApplication.PASSWORD,3600);
+                if( unlocked ) {
+                    try {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                application.choupetteContract.RentMe().sendTransaction(application.accountId, new BigInteger("90000"));
+                            }
+                        }).start();
+
+                        /*minedEvent.subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<Transaction>() {
+                            @Override
+                            public void onCompleted() {
+                                Log.d("GETH", "ON COMPLETED");
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.e("GETH", e.getMessage());
+                            }
+
+                            @Override
+                            public void onNext(Transaction transaction) {
+                                Log.d("GETH", String.valueOf(transaction));
+                                if (transaction != null) {
+                                    goToSelectDestinationActivity();
+                                }
+                            }
+                        });*/
+
+                        Thread.sleep(2000);
+                        goToSelectDestinationActivity();
+
+                    }catch(Exception e){
+                        Log.e("GETH",e.getMessage());
+                    }
+                } else{
+                    throw new EthereumJavaException("can't unlock account");
+                }
             }
         });
 
@@ -74,6 +125,12 @@ public class ChoupetteFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void goToSelectDestinationActivity(){
+        Intent intent = new Intent(getContext(), SelectedDestinationActivity.class);
+        intent.putExtra(Constants.CAR, car);
+        startActivity(intent);
     }
 
     public static ChoupetteFragment newInstance(Car car) {
