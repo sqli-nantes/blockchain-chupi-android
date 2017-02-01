@@ -1,8 +1,18 @@
+# User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+
+# Gradle:
+.idea/gradle.xml
+.idea/libraries
+
+.idea
+
 *.iml
 .gradle
 /local.properties
-/.idea/workspace.xml
 /.idea/libraries
 .DS_Store
 /build
 /captures
+app/.idea
