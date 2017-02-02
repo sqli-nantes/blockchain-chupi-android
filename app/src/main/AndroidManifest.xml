@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.joel.automotive">
+    package="com.sqli.automotive">
 
     <!--uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /-->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".MyApplication">
+        android:name="com.sqli.automotive.MyApplication">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC8B3jBrl-9yS0v0YYi-mYuB3SSmmUmqoE" />
@@ -28,7 +28,7 @@
             android:resource="@xml/searchable" />
 
         <activity
-            android:name=".SplashScreen"
+            android:name="com.sqli.automotive.SplashScreen"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -39,71 +39,51 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.sqli.automotive.MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
         </activity>
         <activity
-            android:name=".ScanningChoiceActivity"
+            android:name="com.sqli.automotive.ScanningChoiceActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".LoadingActivity"
+            android:name="com.sqli.automotive.LoadingActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".QrScanActivity"
+            android:name="com.sqli.automotive.QrScanActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DetectedCarActivity"
+            android:name="com.sqli.automotive.DetectedCarActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait" />
-        <!--android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"-->
         <activity
-            android:name=".MapsActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".SelectedDestinationActivity"
+            android:name="com.sqli.automotive.SelectedDestinationActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SummaryActivity"
+            android:name="com.sqli.automotive.SummaryActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TravelActivity"
+            android:name="com.sqli.automotive.TravelActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ArrivedActivity"
+            android:name="com.sqli.automotive.ArrivedActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".EndActivity"
+            android:name="com.sqli.automotive.EndActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
         </activity>
-        <!--
- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-        -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>

@@ -45,7 +45,7 @@ dependencies {
     // VectorDrawableCompat
     compile 'com.android.support:animated-vector-drawable:24.0.+'
     compile 'com.android.support:support-annotations:24.0.+'
-    compile 'com.google.android.gms:play-services:9.2.1'
+//    compile 'com.google.android.gms:play-services:9.2.1'
     compile 'com.wang.avi:library:1.0.5'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'me.dm7.barcodescanner:zbar:1.9'
