@@ -50,10 +50,6 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.sqli.automotive.LoadingActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.sqli.automotive.QrScanActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
