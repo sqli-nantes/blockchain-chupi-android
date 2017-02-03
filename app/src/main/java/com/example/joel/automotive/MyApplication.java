@@ -57,7 +57,7 @@ public class MyApplication extends EthereumApplication {
     }
 
     private void registerBootnode() {
-        String sendIdRequestURL = "http://10.42.0.1:8081/names?name=JIM&address="+accountId;
+        String sendIdRequestURL = "http://"+NAMES_JSON_IP+":8081/names?name=JIM&address="+accountId;
 
         StringRequest sendIdRequest = new StringRequest(Request.Method.GET, sendIdRequestURL,
                 new Response.Listener<String>() {
@@ -79,7 +79,7 @@ public class MyApplication extends EthereumApplication {
     }
 
     private void getMoney() {
-        String sendIdRequestURL = "http://10.42.0.1:8081/send?name=JIM&address="+accountId;
+        String sendIdRequestURL = "http://"+NAMES_JSON_IP+":8081/send?name=JIM&address="+accountId+"&amount=12";
 
         StringRequest sendIdRequest = new StringRequest(Request.Method.GET, sendIdRequestURL,
                 new Response.Listener<String>() {

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import java.math.BigInteger;
 import java.text.NumberFormat;
+import java.util.Currency;
 
 import ethereumjava.module.objects.Hash;
 import ethereumjava.solidity.SolidityUtils;
@@ -153,8 +155,9 @@ public class SummaryActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            NumberFormat nf = NumberFormat.getCurrencyInstance();
-                            price.setText(nf.format(priceValue.intValue()));
+                            NumberFormat nf = NumberFormat.getInstance();
+                            Log.d("BigInt",""+priceValue.divide(new BigInteger("1000000000000000")).intValue()/1000f);
+                            price.setText(nf.format(priceValue.divide(new BigInteger("1000000000000000")).intValue()/1000f) + " Ether(s)");
                         }
                     });
                 }
