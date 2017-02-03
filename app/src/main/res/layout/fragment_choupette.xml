@@ -30,6 +30,22 @@
         app:layout_anchorGravity="bottom|right|end"
         android:tint="#ffffff" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="83dp"
+        android:text="@string/btn_rent_me"
+        android:id="@+id/btn_ok"
+        android:layout_gravity="bottom"
+        style="@style/First_Button"
+        android:nestedScrollingEnabled="false"
+        android:visibility="visible"
+        android:elevation="24dp"
+        android:layout_weight="1"
+        tools:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -295,21 +311,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="83dp"
-        android:text="@string/btn_rent_me"
-        android:id="@+id/btn_ok"
-        android:layout_gravity="bottom"
-        style="@style/First_Button"
-        android:nestedScrollingEnabled="false"
-        android:visibility="visible"
-        android:elevation="24dp"
-        android:layout_weight="1"
-        tools:layout_height="wrap_content"
-        android:layout_marginBottom="45dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp" />
 
 </android.support.design.widget.CoordinatorLayout>

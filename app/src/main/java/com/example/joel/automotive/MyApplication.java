@@ -26,6 +26,7 @@ public class MyApplication extends EthereumApplication {
 
 
     public static final String PASSWORD = "toto";
+    public static final String NAMES_JSON_IP = "172.17.0.4";
 
     public String accountId;
 
