@@ -71,7 +71,12 @@ public class MyApplication extends EthereumApplication {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("GETH",error.getMessage());
+                if (error.getMessage() != null) {
+                    Log.e("GETH", error.getMessage());
+                }
+                else {
+                    Log.e("GETH", "error in http request using registerBootnode() method");
+                }
             }
         });
 
