@@ -1,10 +1,15 @@
 package com.sqli.automotive;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +28,7 @@ import me.dm7.barcodescanner.zbar.ZBarScannerView;
  * Scan QR code
  */
 public class QrScanActivity extends AppCompatActivity implements ZBarScannerView.ResultHandler {
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1000;
     private ZBarScannerView mScannerView;
 
     @Override
@@ -72,7 +78,22 @@ public class QrScanActivity extends AppCompatActivity implements ZBarScannerView
     public void onResume() {
         super.onResume();
         mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-        mScannerView.startCamera();          // Start camera on resume
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.CAMERA)) {
+
+                //TODO
+                Log.d("CHUPI","shouldShowRequestPermissionRationale");
+            } else{
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_REQUEST_CAMERA);
+            }
+
+        } else {
+            mScannerView.startCamera();          // Start camera on resume
+        }
     }
 
     @Override

@@ -11,7 +11,6 @@ import android.location.Address;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.sqli.automotive.R;
 
 import java.math.BigInteger;
 
@@ -162,8 +161,8 @@ public class SelectedDestinationActivity extends AppCompatActivity implements Vi
             y = 11;
         }else if( v == go_lego ){
             destinationString = "LegoLand (Danemark)";
-            x = 12;
-            y = 1;
+            x = 120;
+            y = 150;
         }else if( v == go_tardis ){
             destinationString = "Le Tardis (London, England)";
             x = 10;
