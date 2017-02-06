@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.joel.automotive.SplashScreen">
+    tools:context="com.example.sqli.automotive.com.sqli.automotive.SplashScreen">
         <item
             android:title="color"
             android:name="android:itemTextAppearance">#fff</item>

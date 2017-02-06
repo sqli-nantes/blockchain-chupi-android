@@ -7,7 +7,6 @@ Testé sur Android 5.1. (Api 22)
 Paramètre de configuration pour les SDK : 
 > minSdkVersion 21 
 > targetSdkVersion 24
-Les nouvelles permissions disponibles dès Android 6 ne sont pas gérées.
 
 
 # scenario
@@ -17,7 +16,7 @@ jim veut louer une voiture pour aller de A vers B.
 * étape 1.1. via QR code : *apparition d'une fenêtre de scan pour QR code*
 * étape 1. 2. via blue touch : *indisponible pour la démo DevFest*
 * étape 2. Choix de la voiture
-* étape 3. Choix de la destination : choix entre 5 destinations préremplis * apparition d'une carte pour sélectionner l'endroit * (désactivé, actuellement : choix préenregistré)
+* étape 3. Choix de la destination : choix entre 5 destinations préremplis *apparition d'une carte pour sélectionner l'endroit (désactivé, actuellement : choix préenregistré)*
 * étape 4. Payement de la course
 * étape 5. Voyage en cours
 * étape 6. Validation de la destination

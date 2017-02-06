@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#fff"
     android:weightSum="1"
-    tools:context="com.example.joel.automotive.EndActivity">
+    tools:context="com.sqli.automotive.EndActivity">
 
     <TextView
         android:text="@string/ttl_end_api"

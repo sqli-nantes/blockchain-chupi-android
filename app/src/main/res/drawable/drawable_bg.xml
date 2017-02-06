@@ -6,6 +6,6 @@
             <solid android:color="@android:color/darker_gray" /> //Color not displayed,just to tell ripple about the bounds
         </shape>
     </item>
-    <item android:drawable="@drawable/ic_cast_light" /> //And
+    <item android:drawable="@drawable/ic_action_wheel" /> //And
     your drawable
 </ripple>
