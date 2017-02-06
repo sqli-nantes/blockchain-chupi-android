@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.1"
 
     defaultConfig {
-        applicationId "com.example.joel.automotive"
+        applicationId "com.sqli.automotive"
         minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
