@@ -1,4 +1,4 @@
-Blockchain-xXx-Mobile
+Mobile app for Chupi demo based on Ethereum Blockchain
 ====================
 
 Application mobile de décentralisation de la location de véhicule par la blockchain.
